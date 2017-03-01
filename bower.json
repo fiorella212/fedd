@@ -1,0 +1,25 @@
+{
+  "name": "ci_puestos",
+  "authors": [
+    "Gustavo I. Chalco <gustavo.chalco@gmc-soft.com>"
+  ],
+  "description": "Puestos de Trabajo",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "application/view/public/components/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "select2": "^4.0.3",
+    "datatables": "datatable#^1.10.13",
+    "parsleyjs": "^2.6.2",
+    "jquery-multiselect": "*"
+  }
+}

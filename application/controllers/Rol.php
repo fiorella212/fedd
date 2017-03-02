@@ -15,6 +15,7 @@ class Rol extends CI_Controller
 		$this->load->model('Roles_model');
 		$this->load->model('Permisos');
 		$this->load->model('Rol_permiso');
+		$this->load->model('Usuarios_model');
 		$this->load->library(array('form_validation', 'session'));
 		$this->load->helper(array('url', 'html', 'form'));
         $this->load->library('Boxspoutxls');
@@ -32,7 +33,7 @@ class Rol extends CI_Controller
 	public function getAll()
 	{
 		$rolesArray = array();
-		$roles = Roles_model::all();
+		$roles = Roles_model::where(['estado' => 1])->get();
 
 		foreach ($roles as $row_rol) {
 			$array = array(
@@ -188,26 +189,24 @@ class Rol extends CI_Controller
 		$result = array('status' => false, 'result' => null);
 		$permisos = $this->session->userdata('permisos');
 		if ($permisos['rol']['eliminar'] == 1) {
-
 			$id = $this->input->post('id');
-
 			try {
-				$sql = "DELETE FROM rol_permiso where id_rol = $id";
-				$this->db->query($sql);
+                $count = Usuarios_model::where(['id_rol'=> $id,'estado'=> 1])->count();
+                if($count == 0) {
+                    $sql = "DELETE FROM rol_permiso where id_rol = $id";
+                    $this->db->query($sql);
 
-				Roles_model::destroy($id);
-				$result['status'] = true;
-				$result['result'] = 'Se ha eliminado el rol satisfactoriamente.';
-				$this->db->trans_commit();
-			} catch (Illuminate\Database\QueryException $e) {
-				$this->db->trans_rollback();
-				$error_code = $e->errorInfo[1];
-				if ($error_code == 1451) { // < codigo de error MySQL para unique
-					$result['result'] = "No es posible eliminar un Perfil, si esta asignado a un Usuario";
-				} else {
+                    $rol = Roles_model::find($id);
 
-					$result['result'] = "Error en la operacion, ocurrio un problema con el registro";
-				}
+                    $rol->estado = 0;
+                    $rol->save();
+                    $result['status'] = true;
+                    $result['result'] = 'Se ha eliminado el rol satisfactoriamente.';
+                    $this->db->trans_commit();
+                }else{
+                    $result['status'] = true;
+                    $result['result'] = "No es posible eliminar un Perfil, si esta asignado a un Usuario";
+                }
 			} catch (Exception $e) {
 				$this->db->trans_rollback();
 				$result['result'] = $e->getMessage();
@@ -231,7 +230,8 @@ class Rol extends CI_Controller
 			$sql = "SELECT r.nombre,p.nombre as permiso,rp.acceso,rp.agregar,rp.editar,rp.eliminar,rp.exportar,rp.importar
                     FROM roles r
                     INNER JOIN rol_permiso rp ON rp.id_rol = r.id
-                    INNER JOIN permisos p ON p.id = rp.id_permiso;;";
+                    INNER JOIN permisos p ON p.id = rp.id_permiso
+                    WHERE r.estado = 1;";
 
             $query = $this->db->query($sql);
             foreach ($query->result() as $key => $value){
@@ -242,8 +242,8 @@ class Rol extends CI_Controller
                 $eliminar = $value->eliminar == 1 ? 'Si' : 'No';
                 $exportar = $value->exportar == 1 ? 'Si' : 'No';
                 $importar = $value->importar == 1 ? 'Si' : 'No';
-                if($value->permiso == 'Evaluacion EVA-ERIN' || $value->permiso == 'Evaluacion Siso' || $value->permiso == 'Evaluacion Fedd'
-                    || $value->permiso == 'Importar personal SAP' || $value->permiso == 'Reporte interno'){
+                if($value->permiso == 'EVALUACION EVA-ERIN' || $value->permiso == 'EVALUACION SISO' || $value->permiso == 'EVALUACION FEDD'
+                    || $value->permiso == 'IMPORTAR PERSONAL SAP' || $value->permiso == 'REPORTE INTERNO'){
                     $agregar = '';
                     $editar = '';
                     $eliminar = '';
@@ -251,8 +251,8 @@ class Rol extends CI_Controller
                     $importar = '';
                 }
 
-                if($value->permiso == 'Mant. Empresa' || $value->permiso == 'Mant. Local' || $value->permiso == 'Mant. Area'
-                    || $value->permiso == 'Mant. Roles' || $value->permiso == 'Mant. Usuario' || $value->permiso == 'Configuracion Siso') {
+                if($value->permiso == 'MANT. EMPRESA' || $value->permiso == 'MANT. LOCAL' || $value->permiso == 'MANT. AREA'
+                    || $value->permiso == 'MANT. ROLES' || $value->permiso == 'MANT. USUARIO' || $value->permiso == 'CONFIGURACION SISO') {
                     $importar = '';
                 }
 

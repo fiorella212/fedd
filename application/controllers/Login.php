@@ -12,7 +12,7 @@ class Login extends CI_Controller
 		$this->load->model('Empresa_model');
 
 		$this->load->library(array('form_validation', 'session'));
-		$this->load->helper(array('url', 'html', 'form'));
+		$this->load->helper(array('url', 'html', 'form','cifrado'));
 	}
 
 	public function index()
@@ -44,7 +44,7 @@ class Login extends CI_Controller
 //			print_r($empresa);die();
 			if ($empresa) {
 				$usuario = Usuarios_model::where(['usuario' => $this->input->post('usuario'),
-					'contrasena' => $this->input->post('password'), 'estado' => 1])->first();
+					'contrasena' => encriptar($this->input->post('password')), 'estado' => 1])->first();
 
 				if ($usuario) {
 					$data_user = array(

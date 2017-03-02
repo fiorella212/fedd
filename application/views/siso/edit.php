@@ -52,7 +52,7 @@
                             <div class="form-group">
                                 <label for="" class="col-md-4 control-label">C&oacute;digo SABHA</label>
                                 <div class="col-md-8">
-                                    <strong><p class="form-control-static codigosabha"><?php echo $puesto['codigo_sabha'];?></p></strong>
+                                    <strong><p class="form-control-static codigosabha"><?php echo urldecode($puesto['codigo_sabha']);?></p></strong>
                                 </div>
                             </div>
                         </div>

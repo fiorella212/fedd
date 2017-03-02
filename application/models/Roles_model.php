@@ -14,7 +14,7 @@ class Roles_model extends Eloquent {
     public $timestamps = false;
     protected $table = 'roles';
     protected $primaryKey = 'id';
-    protected $fillable = ['nombre'];
+    protected $fillable = ['nombre','estado'];
 
     function usuarios() {
         return $this->belongsTo('Usuarios_model','id_usuario');

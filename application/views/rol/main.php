@@ -73,16 +73,16 @@
                                         <tbody>
                                         <?php foreach($permisos as $value){?>
                                             <tr data-id="<?php echo $value['id'];?>">
-                                                <td><?php echo $value['nombre']; ?></td>
+                                                <td><?php echo strtoupper($value['nombre']); ?></td>
                                                 <td><label class="checkbox i-checks"><input name="chkAcceso" id="chkAcceso<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></label></td>
-                                                <?php if($value['nombre'] != 'Evaluacion EVA-ERIN' && $value['nombre'] != 'Evaluacion Siso' && $value['nombre'] != 'Evaluacion Fedd'
-                                                    && $value['nombre'] != 'Importar personal SAP' && $value['nombre'] != 'Reporte interno'){?>
+                                                <?php if($value['nombre'] != 'EVALUACION EVA-ERIN' && $value['nombre'] != 'EVALUACION SISO' && $value['nombre'] != 'EVALUACION FEDD'
+                                                    && $value['nombre'] != 'IMPORTAR PERSONAL SAP' && $value['nombre'] != 'REPORTE INTERNO'){?>
                                                     <td><label class="checkbox i-checks"><input name="chkAgregar" id="chkAgregar<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></td>
                                                     <td><label class="checkbox i-checks"><input name="chkEditar" id="chkEditar<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></td>
                                                     <td><label class="checkbox i-checks"><input name="chkEliminar" id="chkEliminar<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></td>
                                                     <td><label class="checkbox i-checks"><input name="chkExportar" id="chkExportar<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></td>
-                                                <?php if($value['nombre'] != 'Mant. Empresa' && $value['nombre'] != 'Mant. Local' && $value['nombre'] != 'Mant. Area'
-                                                    && $value['nombre'] != 'Mant. Roles' && $value['nombre'] != 'Mant. Usuario' && $value['nombre'] != 'Configuracion Siso'){?>
+                                                <?php if($value['nombre'] != 'MANT. EMPRESA' && $value['nombre'] != 'MANT. LOCAL' && $value['nombre'] != 'MANT. AREA'
+                                                    && $value['nombre'] != 'MANT. ROLES' && $value['nombre'] != 'MANT. USUARIO' && $value['nombre'] != 'CONFIGURACION SISO'){?>
                                                     <td><label class="checkbox i-checks"><input name="chkImportar" id="chkImportar<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></td>
                                                     <?php }else{ ?>
                                                         <td></td>
@@ -156,16 +156,16 @@
                                     <tbody>
                                     <?php foreach($permisos as $value){?>
                                         <tr data-id="<?php echo $value['id'];?>">
-                                            <td><?php echo $value['nombre']; ?></td>
+                                            <td><?php echo strtoupper($value['nombre']); ?></td>
                                             <td style="text-align: center;"><label class="checkbox i-checks"><input name="chkAcceso" id="chkAcceso<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></label></td>
-                                            <?php if($value['nombre'] != 'Evaluacion EVA-ERIN' && $value['nombre'] != 'Evaluacion Siso' && $value['nombre'] != 'Evaluacion Fedd'
-                                                      && $value['nombre'] != 'Importar personal SAP' && $value['nombre'] != 'Reporte interno'){?>
+                                            <?php if($value['nombre'] != 'EVALUACION EVA-ERIN' && $value['nombre'] != 'EVALUACION SISO' && $value['nombre'] != 'EVALUACION FEDD'
+                                                      && $value['nombre'] != 'IMPORTAR PERSONAL SAP' && $value['nombre'] != 'REPORTE INTERNO'){?>
                                                 <td style="text-align: center;"><label class="checkbox i-checks"><input name="chkAgregar" id="chkAgregar<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></td>
                                                 <td style="text-align: center;"><label class="checkbox i-checks"><input name="chkEditar" id="chkEditar<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></td>
                                                 <td style="text-align: center;"><label class="checkbox i-checks"><input name="chkEliminar" id="chkEliminar<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></td>
                                                 <td style="text-align: center;"><label class="checkbox i-checks"><input name="chkExportar" id="chkExportar<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></td>
-                                            <?php if($value['nombre'] != 'Mant. Empresa' && $value['nombre'] != 'Mant. Local' && $value['nombre'] != 'Mant. Area'
-                                                && $value['nombre'] != 'Mant. Roles' && $value['nombre'] != 'Mant. Usuario' && $value['nombre'] != 'Configuracion Siso'){?>
+                                            <?php if($value['nombre'] != 'MANT. EMPRESA' && $value['nombre'] != 'MANT. LOCAL' && $value['nombre'] != 'MANT. AREA'
+                                                    && $value['nombre'] != 'MANT. ROLES' && $value['nombre'] != 'MANT. USUARIO' && $value['nombre'] != 'CONFIGURACION SISO'){?>
                                                 <td style="text-align: center;"><label class="checkbox i-checks"><input name="chkImportar" id="chkImportar<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></td>
                                                 <?php }else{ ?>
                                                     <td></td>

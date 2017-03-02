@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      <a class="navbar-brand" href="#">FEDD</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -114,7 +114,7 @@
           </ul>
         </li>
         <li class="dropdown">
-          <a href="<?php echo base_url().'manual/metodologia.pdf' ?>" target="_blank">Ayuda</a>
+          <a href="<?php echo base_url().'manual/MANUAL_DE_PROCEDIMIENTOS_V7_5.pdf'; ?>" target="_blank">Ayuda</a>
         </li>
       </ul>
       

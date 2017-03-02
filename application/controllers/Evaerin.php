@@ -80,7 +80,12 @@ class Evaerin extends CI_Controller
                     $puesto_trabajo->es_apto = 0;
 
                 } else if ($this->input->post('cmbResultado') == 'AMARILLO') {
-
+					$puesto_trabajo->resultado_final_s_visual = $puesto_trabajo->resultado_pt_s_visual;
+					$puesto_trabajo->resultado_final_s_auditivo = $puesto_trabajo->resultado_pt_s_auditivo;
+					$puesto_trabajo->resultado_final_m_ext_inf = $puesto_trabajo->resultado_pt_m_ext_inf;
+					$puesto_trabajo->resultado_final_m_ext_sup = $puesto_trabajo->resultado_pt_m_ext_sup;
+					$puesto_trabajo->resultado_final_m_intelectual = $puesto_trabajo->resultado_pt_m_intelectual;
+					$puesto_trabajo->resultado_final_m_psicosocial = $puesto_trabajo->resultado_pt_m_psicosocial;
                     $puesto_trabajo->es_apto = null;
                 }
                 $puesto_trabajo->save();

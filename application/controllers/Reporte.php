@@ -94,13 +94,13 @@ puesto_trabajo.aplica_ajutes,
 puesto_trabajo.estado_registro,
 puesto_trabajo.notas,
 personal.planilla,
-personal.codigo_sap,
+personal.codigo_sap AS 'SAP_COD',
 personal.fecha_ingreso,
 personal.nombres_trabajador,
 personal.apellidos_trabajador,
 personal.regimen,
 personal.sede,
-personal.denominacion_sap,
+personal.denominacion_sap AS 'SAP_DENO',
 personal.area,
 personal.fecha_nacimiento,
 personal.sexo,
@@ -116,7 +116,7 @@ INNER JOIN area ON puesto_trabajo.id_area = area.id
 INNER JOIN empresa ON puesto_trabajo.id_empresa = empresa.id
 LEFT JOIN personal on puesto_trabajo.codigo_sap = personal.codigo_sap
 WHERE puesto_trabajo.id_empresa = " . $this->session->id_empresa .  "
-
+or personal.id_empresa = " . $this->session->id_empresa .  "
 UNION 
 
 SELECT 
@@ -184,13 +184,13 @@ puesto_trabajo.aplica_ajutes,
 puesto_trabajo.estado_registro,
 puesto_trabajo.notas,
 personal.planilla,
-personal.codigo_sap,
+personal.codigo_sap AS 'SAP_COD',
 personal.fecha_ingreso,
 personal.nombres_trabajador,
 personal.apellidos_trabajador,
 personal.regimen,
 personal.sede,
-personal.denominacion_sap,
+personal.denominacion_sap AS 'SAP_DENO',
 personal.area,
 personal.fecha_nacimiento,
 personal.sexo,
@@ -205,7 +205,8 @@ INNER JOIN `local` ON puesto_trabajo.id_local = `local`.id
 INNER JOIN area ON puesto_trabajo.id_area = area.id
 INNER JOIN empresa ON puesto_trabajo.id_empresa = empresa.id
 RIGHT JOIN personal on puesto_trabajo.codigo_sap = personal.codigo_sap
-WHERE puesto_trabajo.id_empresa = " . $this->session->id_empresa ;
+WHERE puesto_trabajo.id_empresa = " . $this->session->id_empresa ."
+or personal.id_empresa = " . $this->session->id_empresa ;
 
 		$cabeceras = array(
 			'Local', 'Nombre Entrevistado', 'Puesto Entrevistado', 'Telefono Entrevistado', 'Correo Entrevistado',
@@ -223,6 +224,9 @@ WHERE puesto_trabajo.id_empresa = " . $this->session->id_empresa ;
 			'SAP Fecha Nacimiento', 'SAP Sexo', 'SAP Jubilacion', 'SAP DNI', 'SAP Codigo Trabajador', 'SAP Gerencia');
 
 		$result = $this->db->query($_sql);
+
+
+//		echo "<pre>", print_r($result->result_array());die();
 
 		$this->load->database();
 		$objPHPExcel = new \PHPExcel();

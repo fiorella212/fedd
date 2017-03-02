@@ -16,7 +16,7 @@ class Usuario extends CI_Controller
         $this->load->model('Usuarios_model');
         $this->load->model('Empresa_model');
 		$this->load->library(array('form_validation', 'session'));
-		$this->load->helper(array('url', 'html', 'form'));
+		$this->load->helper(array('url', 'html', 'form','cifrado'));
         $this->load->library('Boxspoutxls');
 	}
 
@@ -48,15 +48,18 @@ class Usuario extends CI_Controller
         foreach ($usuario as $row_usuario){
             if($row_usuario->estado == 1){
                 $empresa = Empresa_model::where(['id'=>$row_usuario->id_empresa])->first();
+                $contrasena = desencriptar($row_usuario->contrasena);
                 $array = array(
                     'id' => $row_usuario->id ,
-                    'nombres' => $row_usuario->nombres .' '.$row_usuario->apellidos  ,
+                    'nombre_completo' => $row_usuario->nombres .' '.$row_usuario->apellidos,
+                    'nombres' => $row_usuario->nombres,
+                    'apellidos' =>$row_usuario->apellidos,
                     'telefono' => $row_usuario->telefono,
                     'email' => $row_usuario->email,
                     'id_rol' => $row_usuario->rol->id,
                     'rol' => $row_usuario->rol->nombre,
                     'usuario' => $row_usuario->usuario,
-                    'contrasena' => $row_usuario->contrasena,
+                    'contrasena' => $contrasena
 
                 );
                 array_push($arrayUsuario, $array);
@@ -97,7 +100,7 @@ class Usuario extends CI_Controller
                     $usuario->telefono = $telefono;
                     $usuario->email = $email;
                     $usuario->usuario = $nombre_usuario;
-                    $usuario->contrasena = $contrasena;
+                    $usuario->contrasena = encriptar($contrasena);
                     $usuario->id_rol = $id_rol;
                     $usuario->usuario_creado = $this->session->userdata('usuario');
                     $usuario->fecha_creado = date('Y-m-d H:i:s');
@@ -139,7 +142,7 @@ class Usuario extends CI_Controller
                 $usuario->telefono = $telefono;
                 $usuario->email = $email;
                 $usuario->usuario = $nombre_usuario;
-                $usuario->contrasena = $contrasena;
+                $usuario->contrasena = encriptar($contrasena);
                 $usuario->id_rol = $id_rol;
                 $usuario->usuario_modificado = $this->session->userdata('usuario');
                 $usuario->fecha_modificado = date('Y-m-d H:i:s');
@@ -194,7 +197,7 @@ class Usuario extends CI_Controller
 	{
 		$response = array('status' => false, 'result' => null);
 		$email = $this->input->post('email');
-        $usuario = Usuarios_model::where(['email' => $email])->first();
+        $usuario = Usuarios_model::where(['email' => $email,'estado' => 1])->first();
         if($usuario){
             $mailSender = new PHPMailer();
             $mailSender->isSMTP();

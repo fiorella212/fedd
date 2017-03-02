@@ -14,7 +14,8 @@
 					<thead>
 					<th>id</th>
 					<th>Nombres</th>
-<!--					<th>Apellidos</th>-->
+					<th>nombres</th>
+					<th>Apellidos</th>
 					<th>Tel&eacute;fono</th>
 					<th>E-mail</th>
 					<th>id_rol</th>
@@ -190,7 +191,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-				<button type="button" class="btn btn-primary btn-edit">Registrar Usuario</button>
+				<button type="button" class="btn btn-primary btn-edit">Actualizar Usuario</button>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
@@ -276,7 +277,9 @@
 				"sPaginationType": "full_numbers",
 				"columns": [
 					{"data": "id"},
+					{"data": "nombre_completo"},
 					{"data": "nombres"},
+					{"data": "apellidos"},
 					{"data": "telefono"},
 					{"data": "email"},
 					{"data": "id_rol"},
@@ -292,15 +295,23 @@
 						"visible": false
 					},
 					{
-						"targets": [4],
+						"targets": [2],
 						"visible": false
 					},
                     {
-                        "targets": [7],
+                        "targets": [3],
                         "visible": false
                     },
 					{
-						"targets": [8],
+						"targets": [6],
+						"visible": false
+					},
+                    {
+                        "targets": [9],
+                        "visible": false
+                    },
+					{
+						"targets": [10],
 						"data": null,
 						"defaultContent": '<button class="btn btn-warning btn-xs m-l-n m-r-n btn-edit">Editar</button>' +
 						'  <button class="btn btn-danger btn-xs m-l-n m-r-n btn-delete">Eliminar</button>'

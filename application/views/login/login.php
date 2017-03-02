@@ -18,7 +18,7 @@
 				$attributes = array('class' => 'form-horizontal', 'id' => 'frmLogin', 'autocomplete' => 'off');
 				echo form_open('login/valid', $attributes);
 				?>
-				<h2 class="text-center">Sistema FEDD</h2>
+				<h2 class="text-center">FEDD</h2>
 					<hr>
 				<div class="form-group">
 					<label for="txtEmpresa" class="col-sm-3 control-label">Empresa</label>
@@ -66,7 +66,7 @@
 	</div>
 </div>
 <div class="modal fade" tabindex="-1" role="dialog" id="recuperarClaveModal">
-	<div class="modal-dialog" role="document">
+	<div class="modal-dialog modal-md" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -77,8 +77,8 @@
 				<form action="" class="form-horizontal form-contrasena">
 
 					<div class="form-group">
-						<label for="txtEMailUser" class="col-lg-2">Ingrese su correo:</label>
-						<div class="col-lg-10">
+						<label for="txtEMailUser" class="col-lg-4">Ingrese su correo:</label>
+						<div class="col-lg-8">
 							<input type="email" required class="form-control required txtEMailUser" id="txtEMailUser" name="txtEMailUser">
 						</div>
 					</div>

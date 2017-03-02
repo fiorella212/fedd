@@ -1,5 +1,5 @@
 <div class="container">
-<?php //echo '<pre>', print_r($pregunta); ?>
+	<?php //echo '<pre>', print_r($pregunta); ?>
 	<div class="col-lg-12 col-md-12 col-sm-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -7,7 +7,7 @@
 			</div>
 			<div class="panel-body">
 
-				<form  action="" class="form-horizontal" method="POST" id="frmPreguntaSiso" name="frmPreguntaSiso">
+				<form action="" class="form-horizontal" method="POST" id="frmPreguntaSiso" name="frmPreguntaSiso">
 
 					<div class="row"><strong class="col-sm-12 text-muted">Datos de la Pregunta </strong></div>
 					<br>
@@ -16,9 +16,11 @@
 							<div class="form-group">
 								<label for="txtPregunta" class="col-md-2 control-label">Pregunta</label>
 								<div class="col-md-10">
-									<input type="text" class="form-control" id="txtPregunta" value="<?php echo $pregunta[0]['pregunuta'] ;?>"
+									<input type="text" class="form-control" id="txtPregunta"
+										   value="<?php echo $pregunta[0]['pregunuta']; ?>"
 										   name="txtPregunta" placeholder="Ingrese Pregunta" required>
-									<input type="hidden" id="txtPreguntaId" name="txtPreguntaId" value="<?php echo $pregunta[0]['id'] ?>">
+									<input type="hidden" id="txtPreguntaId" name="txtPreguntaId"
+										   value="<?php echo $pregunta[0]['id'] ?>">
 								</div>
 							</div>
 						</div>
@@ -28,10 +30,13 @@
 								<div class="col-md-8">
 									<select name="txtGrupo" id="txtGrupo" class="form-control" required>
 
-										<option <?php echo ($pregunta[0]['grupo'] == "Seguridad en el Puesto de Trabajo" ) ? 'selected' : '';?> value="Seguridad en el Puesto de Trabajo">Seguridad en el Puesto de
+										<option <?php echo ($pregunta[0]['grupo'] == "Seguridad en el Puesto de Trabajo") ? 'selected' : ''; ?>
+											value="Seguridad en el Puesto de Trabajo">Seguridad en el Puesto de
 											Trabajo
 										</option>
-										<option <?php echo ($pregunta[0]['grupo'] == "Seguridad en el Proceso" ) ? 'selected' : '';?> value="Seguridad en el Proceso">Seguridad en el Proceso</option>
+										<option <?php echo ($pregunta[0]['grupo'] == "Seguridad en el Proceso") ? 'selected' : ''; ?>
+											value="Seguridad en el Proceso">Seguridad en el Proceso
+										</option>
 									</select>
 								</div>
 							</div>
@@ -42,10 +47,18 @@
 									analizado</label>
 								<div class="col-md-8">
 									<select name="txtTipoRiesgo" id="txtTipoRiesgo" class="form-control" required>
-										<option <?php echo ($pregunta[0]['tipo_riesgo'] == "Entorno" ) ? 'selected' : '';?> value="Entorno">Entorno</option>
-										<option <?php echo ($pregunta[0]['tipo_riesgo'] == "Equipos y Herramientas" ) ? 'selected' : '';?> value="Equipos y Herramientas">Equipos y Herramientas</option>
-										<option <?php echo ($pregunta[0]['tipo_riesgo'] == "Materiales" ) ? 'selected' : '';?> value="Materiales">Materiales</option>
-										<option <?php echo ($pregunta[0]['tipo_riesgo'] == "Proceso" ) ? 'selected' : '';?> value="Proceso">Proceso</option>
+										<option <?php echo ($pregunta[0]['tipo_riesgo'] == "Entorno") ? 'selected' : ''; ?>
+											value="Entorno">Entorno
+										</option>
+										<option <?php echo ($pregunta[0]['tipo_riesgo'] == "Equipos y Herramientas") ? 'selected' : ''; ?>
+											value="Equipos y Herramientas">Equipos y Herramientas
+										</option>
+										<option <?php echo ($pregunta[0]['tipo_riesgo'] == "Materiales") ? 'selected' : ''; ?>
+											value="Materiales">Materiales
+										</option>
+										<option <?php echo ($pregunta[0]['tipo_riesgo'] == "Proceso") ? 'selected' : ''; ?>
+											value="Proceso">Proceso
+										</option>
 									</select>
 								</div>
 							</div>
@@ -62,8 +75,9 @@
 									<label for="txtValorSensorialVisual" class="col-md-6 control-label">Sensorial
 										Visual</label>
 									<div class="col-md-6">
-										<input type="text" class="form-control text-center" id="txtValorSensorialVisual"
-											   value="<?php echo $pregunta[0]['valor_s_visual'] ;?>"
+										<input type="text" class="form-control text-center valorPregunta"
+											   id="txtValorSensorialVisual"
+											   value="<?php echo $pregunta[0]['valor_s_visual']; ?>"
 											   name="txtValorSensorialVisual" placeholder="">
 									</div>
 								</div>
@@ -71,9 +85,9 @@
 									<label for="txtValorSensorialAuditivo" class="col-md-6 control-label">Sensorial
 										Auditivo</label>
 									<div class="col-md-6">
-										<input type="text" class="form-control text-center"
+										<input type="text" class="form-control text-center valorPregunta"
 											   id="txtValorSensorialAuditivo"
-											   value="<?php echo $pregunta[0]['valor_s_auditivo'] ;?>"
+											   value="<?php echo $pregunta[0]['valor_s_auditivo']; ?>"
 											   name="txtValorSensorialAuditivo" placeholder="">
 									</div>
 								</div>
@@ -83,8 +97,9 @@
 									<label for="txtValorMotrizInferior" class="col-md-6 control-label">Motriz ext.
 										Inferior</label>
 									<div class="col-md-6">
-										<input type="text" class="form-control text-center" id="txtValorMotrizInferior"
-											   value="<?php echo $pregunta[0]['valor_m_ext_inferior'] ;?>"
+										<input type="text" class="form-control text-center valorPregunta"
+											   id="txtValorMotrizInferior"
+											   value="<?php echo $pregunta[0]['valor_m_ext_inferior']; ?>"
 											   name="txtValorMotrizInferior" placeholder="">
 									</div>
 								</div>
@@ -92,8 +107,9 @@
 									<label for="txtValorMotrizSuperior" class="col-md-6 control-label">Motriz ext.
 										Superior</label>
 									<div class="col-md-6">
-										<input type="text" class="form-control text-center" id="txtValorMotrizSuperior"
-											   value="<?php echo $pregunta[0]['valor_m_ext_superior'] ;?>"
+										<input type="text" class="form-control text-center valorPregunta"
+											   id="txtValorMotrizSuperior"
+											   value="<?php echo $pregunta[0]['valor_m_ext_superior']; ?>"
 											   name="txtValorMotrizSuperior" placeholder="">
 									</div>
 								</div>
@@ -103,9 +119,9 @@
 									<label for="txtValorMentalIntelectual" class="col-md-6 control-label">Mental
 										Intelectual</label>
 									<div class="col-md-6">
-										<input type="text" class="form-control text-center"
+										<input type="text" class="form-control text-center valorPregunta"
 											   id="txtValorMentalIntelectual"
-											   value="<?php echo $pregunta[0]['valor_m_intelectual'] ;?>"
+											   value="<?php echo $pregunta[0]['valor_m_intelectual']; ?>"
 											   name="txtValorMentalIntelectual" placeholder="">
 									</div>
 								</div>
@@ -113,9 +129,9 @@
 									<label for="txtValorMentalPsicosocial" class="col-md-6 control-label">Mental
 										Psicosocial</label>
 									<div class="col-md-6">
-										<input type="text" class="form-control text-center"
+										<input type="text" class="form-control text-center valorPregunta"
 											   id="txtValorMentalPsicosocial"
-											   value="<?php echo $pregunta[0]['valor_m_psicosocial'] ;?>"
+											   value="<?php echo $pregunta[0]['valor_m_psicosocial']; ?>"
 											   name="txtValorMentalPsicosocial" placeholder="">
 									</div>
 								</div>
@@ -160,5 +176,18 @@
 				});
 			}
 		});
+
+		$('.valorPregunta').on('change', function (e) {
+			e.preventDefault();
+			var l = $(this).val().length;
+			if (l == 0) {
+				$(this).removeAttr("required");
+				$(this).removeAttr("pattern");
+			} else {
+				$(this).attr("required");
+				$(this).attr("pattern", "^[0-5]");
+			}
+		});
+
 	});
 </script>

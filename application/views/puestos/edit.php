@@ -1,5 +1,5 @@
 <?php
-//echo '<pre>', print_r($puesto[0]), '</pre>';
+//echo '<pre>', print_r($puesto->toArray()), '</pre>';die();
 
 $array = array(
 	'sensorial_visual' => array(0 => 'Sin Discapacidad',
@@ -425,6 +425,7 @@ $array = array(
 
 
 		$('#cmbLocal').on('change', function () {
+		    $('#txtCodigoSabha').val('');
 			$.ajax({
 				method: "POST",
 				dataType: 'json',

@@ -12,6 +12,10 @@
                         <div class="col-md-12">
                             <form action="javascript:void(0);">
                                 <div class="row">
+									<div class="form-group">
+										<h4 class="text-center">Seleccione los puestos para importar en la Empresa: <strong><?php echo $this->session->userdata('empresa'); ?></strong></h4>
+										<br><br>
+									</div>
                                     <div class="form-group">
                                         <label class="col-lg-3 control-label">Buscar el archivo:</label>
                                         <div class="col-lg-9">

@@ -316,6 +316,7 @@
 		});
 
 		$('#cmbLocal').on('change', function () {
+			$('#txtCodigoSabha').val('');
 			$.ajax({
 				method: "POST",
 				dataType: 'json',

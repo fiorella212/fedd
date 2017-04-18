@@ -15,7 +15,7 @@
                     <th>id_empresa</th>
 					<th>Raz&oacute;n Social</th>
                     <th>id_local</th>
-					<th>Local</th>
+					<th>Sede</th>
                     <th>id_area</th>
 					<th>&Aacute;rea</th>
 					<th>Acciones</th>
@@ -54,7 +54,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="cmbLocal" class="col-sm-2 control-label">Local</label>
+						<label for="cmbLocal" class="col-sm-2 control-label">Sede</label>
 						<div class="col-sm-10">
 							<select class="form-control required id_local" required name="id_local" id="id_local" style="width: 100%;">
 								<option value="">Seleccione</option>
@@ -103,7 +103,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="cmbLocal" class="col-sm-2 control-label">Local</label>
+						<label for="cmbLocal" class="col-sm-2 control-label">Sede</label>
 						<div class="col-sm-10">
 							<select class="form-control required id_local" required name="id_local" id="id_local_edit" style="width: 100%;">
 								<option value="">Seleccione</option>

@@ -10,7 +10,7 @@
 				<form action="" class="form-horizontal">
 					<div class="row"><strong class="col-sm-12 text-muted">Datos del Puesto de Trabajo</strong></div>
 					<div class="row">
-						<strong class="col-sm-6 text">Local: &nbsp;&nbsp; <?php echo $local; ?></strong>
+						<strong class="col-sm-6 text">Sede: &nbsp;&nbsp; <?php echo $local; ?></strong>
 						<strong class="col-sm-6 text">&Aacute;rea de trabajo: &nbsp;&nbsp; <?php echo $area; ?></strong>
 						<strong class="col-sm-6 text">&Aacute;rea de trabajo:
 							&nbsp;&nbsp; <?php echo urldecode($codigo_sabha); ?></strong>
@@ -78,6 +78,7 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 text-center">
+				<a href="<?php echo site_url("main"); ?>" class="btn btn-danger" >Cancelar</a>
 				<input type="button" class="btn btn-primary" data-puesto="<?php echo $id_puesto_trabajo; ?>"
 					   value="Registrar Cuestionario"
 					   id="btnRegistrarEvaluacion">

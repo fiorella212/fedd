@@ -65,29 +65,33 @@ class Personal extends CI_Controller
 
             foreach ($sheetData as $index => $value) {
                 if ( $index != 1 ){
+//                    'id_empresa_sap','empresa_nombre_sap','id_sede_sap','sede_nombre_sap','area_nombre',
+//                            'codigo_puesto_creado','codigo_sabha','consultoria','codigo_puesto','nombre_puesto',
+//                            'genero','num_colaborador',
+//                            'nombres_apellidos','fecha_nacimiento','fecha_ingreso','id_empresa'
                     $personal = new Personal_model();
-                    $personal->planilla = $value['A'];
-                    $personal->codigo_sap = $value['B'];
-                    $personal->fecha_ingreso = $value['C'];
-                    $personal->nombres_trabajador = $value['D'];
-                    $personal->apellidos_trabajador = $value['E'];
-                    $personal->regimen = $value['F'];
-                    $personal->sede = $value['G'];
-                    $personal->denominacion_sap = $value['H'];
-                    $personal->area = $value['I'];
-                    $personal->fecha_nacimiento = $value['J'];
-                    $personal->sexo = $value['K'];
-                    $personal->anos_res_jubilacion = $value['L'];
-                    $personal->ano_jubilacion = $value['M'];
-                    $personal->dni = $value['N'];
-                    $personal->codigo_trabajador = $value['O'];
-                    $personal->gerencia = $value['P'];
+                    $personal->id_empresa_sap = $value['A'];
+                    $personal->empresa_nombre_sap = $value['B'];
+                    $personal->id_sede_sap = $value['C'];
+                    $personal->sede_nombre_sap = $value['D'];
+                    $personal->area_nombre = $value['E'];
+                    $personal->codigo_puesto_creado = $value['F'];
+                    $personal->codigo_sabha = $value['G'];
+                    $personal->consultoria = $value['H'];
+                    $personal->codigo_puesto = $value['I'];
+                    $personal->nombre_puesto = $value['J'];
+                    $personal->genero = $value['K'];
+                    $personal->num_colaborador = $value['L'];
+                    $personal->nombres_apellidos = $value['M'];
+                    $personal->fecha_nacimiento = date("Y-m-d",strtotime($value['N']));
+                    $personal->fecha_ingreso = date("Y-m-d",strtotime($value['O']));
+                    $personal->sede_estudio = $value['P'] == ''? '' : $value['P'];
                     $personal->id_empresa = $this->session->id_empresa;
                     $personal->save();
                 }
             }
             $result['status'] = true;
-            $result['result'] = 'Se importo los puestos correctamente';
+            $result['result'] = 'Se importo los registros SAP correctamente';
 
         }catch(Exception $e){
             $result['result'] = $e->getMessage();
@@ -96,4 +100,16 @@ class Personal extends CI_Controller
         unlink("uploads/{$newfilename}");
         echo json_encode($result);
     }
+
+    function deleteall() {
+		try {
+			$result = array('status' => false, 'result' => null);
+			$this->db->query('TRUNCATE personal');
+			$result['status'] = true;
+			$result['result'] = 'Se elimino correctamente los registros de Personal SAP';
+		} catch(Exception $e){
+			$result['result'] = $e->getMessage();
+		}
+		echo json_encode($result);
+	}
 }

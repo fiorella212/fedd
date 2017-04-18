@@ -57,10 +57,10 @@ $array = array(
 					<div class="row">
 						<div class="col-lg-6 col-md-6 col-sm-6">
 							<div class="form-group">
-								<label for="cmbLocal" class="col-md-2 control-label">Local</label>
+								<label for="cmbLocal" class="col-md-2 control-label">Sede</label>
 								<div class="col-md-10">
 									<select name="cmbLocal" id="cmbLocal" class="form-control" required>
-										<option value="">Seleccione Local</option>
+										<option value="">Seleccione Sede</option>
 										<?php
 										foreach ($locales as $value) {
 
@@ -210,8 +210,7 @@ $array = array(
 					<div class="row">
 						<div class="col-lg-6 col-md-6 col-sm-6">
 							<div class="form-group">
-								<label for="cmbArea" class="control-label col-md-7">&Aacute;rea a la que pertenece el
-									puesto de trabajo</label>
+								<label for="cmbArea" class="control-label col-md-7">&Aacute;rea estandar</label>
 							</div>
 						</div>
 						<div class="col-lg-6 col-md-6 col-sm-6">
@@ -233,6 +232,21 @@ $array = array(
 					<div class="row">
 						<div class="col-lg-6 col-md-6 col-sm-6">
 							<div class="form-group">
+								<label for="cmbAreaPuesto" class="control-label col-md-7">&Aacute;rea a la que pertenece el
+									puesto de trabajo</label>
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6">
+							<div class="form-group">
+								<input type="text" id="cmbAreaPuesto" name="cmbAreaPuesto" class="form-control"
+									   value="<?php echo isset($puesto[0]['area_puesto']) ? $puesto[0]['area_puesto'] : ''; ?>"
+									   placeholder="Ingrese Area de Puesto de Trabajo">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6 col-md-6 col-sm-6">
+							<div class="form-group">
 								<label for="txtFuncionPuesto" class="control-label col-md-7">Funci&oacute;n principal
 									del puesto evaluado</label>
 							</div>
@@ -242,6 +256,38 @@ $array = array(
 								<input type="text" id="txtFuncionPuesto" name="txtFuncionPuesto" class="form-control"
 									   value="<?php echo isset($puesto[0]['funcion_principal']) ? $puesto[0]['funcion_principal'] : ''; ?>"
 									   placeholder="Ingrese funci&oacute;n de puesto">
+							</div>
+						</div>
+
+					</div>
+					<div class="row">
+						<div class="col-lg-6 col-md-6 col-sm-6">
+							<div class="form-group">
+								<label for="cmbTipoPuesto" class="control-label col-md-7">Tipo de Puesto de Trabajo</label>
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6">
+							<div class="form-group">
+								<select name="cmbTipoPuesto" id="cmbTipoPuesto" class="form-control">
+									<option <?php echo ($puesto[0]['tipo_puesto'] == "CORE") ? 'selected' : ''; ?> value="CORE">CORE</option>
+									<option <?php echo ($puesto[0]['tipo_puesto'] == "SOPORTE") ? 'selected' : ''; ?> value="SOPORTE">SOPORTE</option>
+								</select>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="row">
+						<div class="col-lg-6 col-md-6 col-sm-6">
+							<div class="form-group">
+								<label for="txtCodigoUnificado" class="control-label col-md-7">Codigo UNIFICADO</label>
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6">
+							<div class="form-group">
+								<input type="text" id="txtCodigoUnificado" name="txtCodigoUnificado" class="form-control"
+									   value="<?php echo isset($puesto[0]['codigo_unificado']) ? $puesto[0]['codigo_unificado'] : ''; ?>"
+									   placeholder="Codigo Unificado">
 							</div>
 						</div>
 
@@ -375,9 +421,9 @@ $array = array(
 							<strong><?php
 								if (isset($puesto[0]['resultado_final_m_psicosocial'])) {
 									if (isset($puesto[0]['es_apto'])) {
-										if ($puesto[0]['es_apto'] == 1) {
+										if ($puesto[0]['es_apto'] == 'APTO') {
 											echo 'Apto con observaciones de evaluacion final';
-										} else if ($puesto[0]['es_apto'] == 0){
+										} else if ($puesto[0]['es_apto'] == 'NO APTO'){
 											echo 'No Apto';
 										}
 									}

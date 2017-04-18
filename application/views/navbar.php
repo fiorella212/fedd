@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">FEDD</a>
+      <a class="navbar-brand" href="#">GEORDI</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -81,12 +81,70 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reportes <span class="caret"></span></a>
           <ul class="dropdown-menu">
-              <?php if(array_key_exists('reporte',$permisos)){
-              if($permisos['reporte']['acceso'] == 1){
+			  <?php
+			  if(array_key_exists('reporte',$permisos)){
+              	if($permisos['reporte']['acceso'] == 1){
               ?>
-            <li><a target="_blank" href="<?php echo site_url('reporte')?>">Reporte Interno</a></li>
+            	<li><a target="_blank" href="<?php echo site_url('reporte')?>">Reporte Interno</a></li>
+              <?php
+              	}
+              }
+
+			  if(array_key_exists('reporte/reportePuestos',$permisos)){
+                 if($permisos['reporte/reportePuestos']['acceso'] == 1){
+              ?>
+              	<li><a href="<?php echo site_url('reporte/reportePuestos')?>">Reporte de puestos</a></li>
+			  <?php
+                 }
+              }
+
+			  if(array_key_exists('reporte/reporteLocal',$permisos)){
+				  if($permisos['reporte/reporteLocal']['acceso'] == 1){
+					  ?>
+					  <li><a href="<?php echo site_url('reporte/reporteLocal')?>">Reporte Tabla 1</a></li>
+					  <?php
+				  }
+			  }
+			  if(array_key_exists('reporte/reporteLocalArea',$permisos)){
+				  if($permisos['reporte/reporteLocalArea']['acceso'] == 1){
+					  ?>
+					  <li><a href="<?php echo site_url('reporte/reporteLocalArea')?>">Reporte Tabla 3</a></li>
+					  <?php
+				  }
+			  }
+
+			  if(array_key_exists('reporte/reporteFuncionalidad',$permisos)){
+				  if($permisos['reporte/reporteFuncionalidad']['acceso'] == 1){
+					  ?>
+					  <li><a href="<?php echo site_url('reporte/reporteFuncionalidad')?>">Reporte Tabla 4</a></li>
+					  <?php
+				  }
+			  }
+
+			  if(array_key_exists('reporte/reporteProduccionArea',$permisos)){
+				  if($permisos['reporte/reporteProduccionArea']['acceso'] == 1){
+					  ?>
+					  <li><a href="<?php echo site_url('reporte/reporteProduccionArea')?>">Reporte Tabla 5</a></li>
+					  <?php
+				  }
+			  }
+
+              if(array_key_exists('reporte/reporteAptitud',$permisos)){
+                  if($permisos['reporte/reporteAptitud']['acceso'] == 1){
+              ?>
+                      <li><a href="<?php echo site_url('reporte/reporteAptitud')?>">Reporte Tabla 6</a></li>
               <?php }
-              } ?>
+              }
+
+              if(array_key_exists('reporte/reporteContingencia',$permisos)){
+                  if($permisos['reporte/reporteContingencia']['acceso'] == 1){
+              ?>
+                      <li><a href="<?php echo site_url('reporte/reporteContingencia')?>">Reporte Tabla 7</a></li>
+              <?php
+                  }
+              }
+              ?>
+
           </ul>
         </li>
         <li class="dropdown">
@@ -114,7 +172,7 @@
           </ul>
         </li>
         <li class="dropdown">
-          <a href="<?php echo base_url().'manual/MANUAL_DE_PROCEDIMIENTOS_V7_5.pdf'; ?>" target="_blank">Ayuda</a>
+          <a href="<?php echo base_url().'manual/manual_geordi.pdf'; ?>" target="_blank">Ayuda</a>
         </li>
       </ul>
       

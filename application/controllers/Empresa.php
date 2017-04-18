@@ -42,6 +42,7 @@ class Empresa extends CI_Controller
                 'codigo' => $row_empresa->codigo,
                 'razon_social' => $row_empresa->razon_social,
                 'ruc' => $row_empresa->ruc,
+                'rubro' => $row_empresa->rubro,
                 'direccion' => $row_empresa->direccion,
                 'telefono' => $row_empresa->telefono,
             );
@@ -66,6 +67,7 @@ class Empresa extends CI_Controller
             $ruc = $this->input->post('ruc');
             $direccion = $this->input->post('direccion');
             $telefono = $this->input->post('telefono');
+            $rubro = $this->input->post('rubro');
 
             try {
                 $empresa = new Empresa_model();
@@ -76,6 +78,7 @@ class Empresa extends CI_Controller
                 $empresa->telefono = $telefono;
                 $empresa->usuario_creado = $this->session->userdata('usuario');
                 $empresa->fecha_creado = date('Y-m-d H:i:s');
+                $empresa->rubro = $rubro;
 
                 $empresa->save();
                 $result['status'] = true;
@@ -97,9 +100,11 @@ class Empresa extends CI_Controller
 				} else {
 
 					$result['result'] = "Error en la operacion, ocurrio un problema con el registro";
+					$result['exception'] = $e->getMessage();
 				}
 			} catch (Exception $e) {
-                $result['result'] = $e->getMessage();
+				$result['result'] = "Error en la operacion, ocurrio un problema con el registro";
+				$result['exception'] = $e->getMessage();
 
             }
         } else {
@@ -120,6 +125,7 @@ class Empresa extends CI_Controller
             $ruc = $this->input->post('ruc');
             $direccion = $this->input->post('direccion');
             $telefono = $this->input->post('telefono');
+			$rubro = $this->input->post('rubro');
 
             try {
                 $empresa = Empresa_model::find($id);
@@ -130,6 +136,7 @@ class Empresa extends CI_Controller
                 $empresa->telefono = $telefono;
                 $empresa->usuario_modificado = $this->session->userdata('usuario');
                 $empresa->fecha_modificado = date('Y-m-d H:i:s');
+				$empresa->rubro = $rubro;
 
                 $empresa->save();
                 $result['status'] = true;
@@ -148,11 +155,12 @@ class Empresa extends CI_Controller
 					}
 
 				} else {
-
 					$result['result'] = "Error en la operacion, ocurrio un problema con el registro";
+					$result['exception'] = $e->getMessage();
 				}
             } catch (Exception $e) {
-                $result['result'] = $e->getMessage();
+				$result['result'] = "Error en la operacion, ocurrio un problema con el registro";
+				$result['exception'] = $e->getMessage();
 
             }
         } else {

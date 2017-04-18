@@ -14,9 +14,10 @@ class Personal_model extends Eloquent {
     public $timestamps = false;
     protected $table = 'personal';
     protected $primaryKey = 'id';
-    protected $fillable = ['planilla','codigo_sap','fecha_ingreso','nombres_trabajador','apellidos_trabajador',
-                            'regimen','sede','denominacion_sap','area','fecha_nacimiento','sexo','anos_res_jubilacion',
-                            'ano_jubilacion','dni','codigo_trabajador','gerencia','id_empresa'];
+    protected $fillable = ['id_empresa_sap','empresa_nombre_sap','id_sede_sap','sede_nombre_sap','area_nombre',
+                            'codigo_puesto_creado','codigo_sabha','consultoria','codigo_puesto','nombre_puesto',
+                            'genero','num_colaborador','nombres_apellidos','fecha_nacimiento','fecha_ingreso','sede_estudio','id_empresa'];
+
 
 }
 

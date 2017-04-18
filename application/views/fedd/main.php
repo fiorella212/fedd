@@ -14,10 +14,10 @@
 					<div class="row">
 						<div class="col-lg-6 col-md-6 col-sm-6">
 							<div class="form-group">
-								<label for="cmbLocal" class="col-md-4 control-label">Local</label>
+								<label for="cmbLocal" class="col-md-4 control-label">Sede</label>
 								<div class="col-md-8">
 									<select name="cmbLocal" id="cmbLocal" class="form-control">
-										<option value="">Seleccione Local</option>
+										<option value="">Seleccione Sede</option>
 										<?php
 										foreach ($locales as $value) {
 											echo '<option value="' . $value['id'] . '">' . $value['nombre'] . '</option>';
@@ -303,7 +303,7 @@
 							<div class="col-lg-3 col-md-3 col-sm-3">
 								<label for="cmbFeddVisual">
 									Visual&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<select name="cmbFeddVisual" id="cmbFeddVisual" class="form-control" disabled>
+									<select name="cmbFeddVisual" id="cmbFeddVisual" class="form-control evalFinal" disabled>
 										<option value="">Seleccione</option>
 										<option value="0">Sin Discapacidad</option>
 										<option value="1">Ligero</option>
@@ -317,7 +317,7 @@
 							<div class="col-lg-3 col-md-3 col-sm-3">
 								<label for="cmbFeddAuditivo">
 									Auditivo
-									<select name="cmbFeddAuditivo" id="cmbFeddAuditivo" class="form-control" disabled>
+									<select name="cmbFeddAuditivo" id="cmbFeddAuditivo" class="form-control evalFinal" disabled>
                                         <option value="">Seleccione</option>
                                         <option value="0">Sin Discapacidad</option>
                                         <option value="1">Ligero</option>
@@ -331,7 +331,7 @@
 							<div class="col-lg-3 col-md-3 col-sm-3">
 								<label for="cmbFeddExtSuperiores">
 									Ext. Superiores
-									<select name="cmbFeddExtSuperiores" id="cmbFeddExtSuperiores" class="form-control"
+									<select name="cmbFeddExtSuperiores" id="cmbFeddExtSuperiores" class="form-control evalFinal"
 											disabled>
                                         <option value="">Seleccione</option>
                                         <option value="0">Sin Discapacidad</option>
@@ -351,7 +351,7 @@
 							<div class="col-lg-3 col-md-3 col-sm-3">
 								<label for="cmbFeddInferiores">
 									Ext. Inferiores
-									<select name="cmbFeddInferiores" id="cmbFeddInferiores" class="form-control" disabled>
+									<select name="cmbFeddInferiores" id="cmbFeddInferiores" class="form-control evalFinal" disabled>
 										<option value="">Seleccione</option>
                                         <option value="0">Sin Discapacidad</option>
                                         <option value="1">Ligero</option>
@@ -365,7 +365,7 @@
 							<div class="col-lg-3 col-md-3 col-sm-3">
 								<label for="cmbFeddIntelectual">
 									Intelectual
-									<select name="cmbFeddIntelectual" id="cmbFeddIntelectual" class="form-control"
+									<select name="cmbFeddIntelectual" id="cmbFeddIntelectual" class="form-control evalFinal"
 											disabled>
                                         <option value="">Seleccione</option>
                                         <option value="0">Sin Discapacidad</option>
@@ -380,7 +380,7 @@
 							<div class="col-lg-3 col-md-3 col-sm-3">
 								<label for="cmbFeddPsicosocial">
 									Psicosocial
-									<select name="cmbFeddPsicosocial" id="cmbFeddPsicosocial" class="form-control"
+									<select name="cmbFeddPsicosocial" id="cmbFeddPsicosocial" class="form-control evalFinal"
 											disabled>
                                         <option value="">Seleccione</option>
                                         <option value="0">Sin Discapacidad</option>
@@ -475,6 +475,20 @@
 				}
 			});
 		});
+
+        $('.evalFinal').change(function(){
+            if($('.evaerin').html() == 'AMARILLO'){
+                if($('#cmbFeddVisual').val() >= 1 && $('#cmbFeddAuditivo').val() >= 1 && $('#cmbFeddExtSuperiores').val() >= 1
+                    && $('#cmbFeddInferiores').val() >= 1 && $('#cmbFeddIntelectual').val() >= 1 && $('#cmbFeddPsicosocial').val() >= 1){
+                    $('.apto').html('Apto con observaciones de evaluacion final');
+                    $('#apto').val(1);
+
+                }else{
+                    $('.apto').html('No Apto');
+                    $('#apto').val(0);
+                }
+            }
+        });
 
         $('#btnRegistrarEvaluacion').on('click',function(e){
             e.preventDefault();
@@ -639,8 +653,15 @@
                                 $('#cmbFeddInferiores').val(msg.puesto.resultado_pt_m_ext_inf).trigger("change");
                                 $('#cmbFeddIntelectual').val(msg.puesto.resultado_pt_m_intelectual).trigger("change");
                                 $('#cmbFeddPsicosocial').val(msg.puesto.resultado_pt_m_psicosocial).trigger("change");
+								if(msg.puesto.resultado_pt_s_visual >= 1 && msg.puesto.resultado_pt_s_auditivo >= 1 && msg.puesto.resultado_pt_m_ext_sup >= 1
+								  && msg.puesto.resultado_pt_m_ext_inf >= 1 && msg.puesto.resultado_pt_m_intelectual >= 1 && msg.puesto.resultado_pt_m_psicosocial >= 1){
+                                    $('.apto').html('Apto con observaciones de evaluacion final');
+                                    $('#apto').val(1);
 
-                                $('#cmbFeddVisual').attr('disabled',false);
+								}else{
+                                    $('.apto').html('No Apto');
+                                    $('#apto').val(0);
+								}
                                 $('#cmbFeddAuditivo').attr('disabled',false);
                                 $('#cmbFeddExtSuperiores').attr('disabled',false);
                                 $('#cmbFeddInferiores').attr('disabled',false);
@@ -782,8 +803,16 @@
                         $('#cmbFeddPsicosocial').val('').trigger("change");
 
                         if(msg.eva_erin_resultado == 'VERDE'){
-                            $('.apto').html('Apto con observaciones de evaluacion final ');
-                            $('#apto').val(msg.es_apto);
+                            if(msg.es_apto == 1 && msg.es_apto!= null){
+                                $('.apto').html('Apto con observaciones de evaluacion final ');
+                                $('#apto').val(msg.es_apto);
+                            }else if (msg.es_apto == 0 && msg.es_apto!= null){
+                                $('.apto').html('No Apto');
+                                $('#apto').val(msg.es_apto);
+                            } else {
+                                $('.apto').html('');
+                                $('#apto').val(msg.es_apto);
+                            }
 
                             $('#cmbFeddVisual').attr('disabled',true);
                             $('#cmbFeddAuditivo').attr('disabled',true);
@@ -793,8 +822,16 @@
                             $('#cmbFeddPsicosocial').attr('disabled',true);
 
                         }else if(msg.eva_erin_resultado == 'ROJO'){
-                            $('.apto').html('No Apto');
-                            $('#apto').val(msg.es_apto);
+                            if(msg.es_apto == 1 && msg.es_apto!= null){
+                                $('.apto').html('Apto con observaciones de evaluacion final ');
+                                $('#apto').val(msg.es_apto);
+                            }else if (msg.es_apto == 0 && msg.es_apto!= null){
+                                $('.apto').html('No Apto');
+                                $('#apto').val(msg.es_apto);
+                            } else {
+                                $('.apto').html('');
+                                $('#apto').val(msg.es_apto);
+                            }
 
                             $('#cmbFeddVisual').attr('disabled',true);
                             $('#cmbFeddAuditivo').attr('disabled',true);
@@ -821,6 +858,16 @@
                             $('#cmbFeddInferiores').attr('disabled',false);
                             $('#cmbFeddIntelectual').attr('disabled',false);
                             $('#cmbFeddPsicosocial').attr('disabled',false);
+
+							if(msg.resultado_final_s_visual >= 1 && msg.resultado_final_s_auditivo >= 1 && msg.resultado_final_m_ext_sup >= 1
+								&& msg.resultado_final_m_ext_inf >= 1 && msg.resultado_final_m_intelectual >= 1 && msg.resultado_final_m_psicosocial >= 1){
+                                $('.apto').html('Apto con observaciones de evaluacion final');
+                                $('#apto').val(1);
+
+							}else{
+                                $('.apto').html('No Apto');
+                                $('#apto').val(0);
+							}
 
 //                            $('#cmbFeddVisual').val(msg.resultado_final_s_visual).trigger("change");
 //                            $('#cmbFeddAuditivo').val(msg.resultado_final_s_auditivo).trigger("change");

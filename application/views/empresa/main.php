@@ -17,6 +17,7 @@
 					<th>C&oacute;digo</th>
 					<th>Raz&oacute;n Social</th>
 					<th>RUC</th>
+					<th>RUBRO</th>
 					<th>Direcci&oacute;n</th>
 					<th>Tel&eacute;fono</th>
 					<th>Acciones</th>
@@ -72,6 +73,12 @@
 						</div>
 					</div>
 					<div class="form-group">
+						<label for="txtRuc" class="col-sm-2 control-label">Rubro</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control rubro required" data-required="true" id="txtRubro" placeholder="Rubro">
+						</div>
+					</div>
+					<div class="form-group">
 						<label for="txtDireccion" class="col-sm-2 control-label">Direcci&oacute;n</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control direccion required" required data-required="true"  id="txtDireccion" placeholder="Direccion">
@@ -122,6 +129,12 @@
                             <input type="text" class="form-control ruc required" pattern="^\d{11}$" title = "valor numérico de 11 digitos" data-required="true" id="txtRuc" placeholder="RUC">
                         </div>
                     </div>
+					<div class="form-group">
+						<label for="txtRuc" class="col-sm-2 control-label">Rubro</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control rubro required" data-required="true" id="txtRubro" placeholder="Rubro">
+						</div>
+					</div>
                     <div class="form-group">
                         <label for="txtDireccion" class="col-sm-2 control-label">Direcci&oacute;n</label>
                         <div class="col-sm-10">
@@ -176,6 +189,7 @@
                 codigo: 'codigo',
                 razon_social: 'razon_social',
                 ruc: 'ruc',
+                rubro: 'rubro',
                 direccion: 'direccion',
                 telefono: 'telefono'
             };
@@ -226,6 +240,7 @@
                     {"data": "codigo"},
                     {"data": "razon_social"},
                     {"data": "ruc"},
+                    {"data": "rubro"},
                     {"data": "direccion"},
                     {"data": "telefono"}
 
@@ -237,7 +252,7 @@
                         "visible": false
                     },
                     {
-                        "targets": [6],
+                        "targets": [7],
                         "data": null,
                         "defaultContent": '<button class="btn btn-warning btn-xs m-l-n m-r-n btn-edit">Editar</button>' +
                         '  <button class="btn btn-danger btn-xs m-l-n m-r-n btn-delete">Eliminar</button>'
@@ -251,6 +266,7 @@
             modal.find('.' + form_element.codigo).val('');
             modal.find('.' + form_element.razon_social).val('');
             modal.find('.' + form_element.ruc).val('');
+            modal.find('.' + form_element.rubro).val('');
             modal.find('.' + form_element.direccion).val('');
             modal.find('.' + form_element.telefono).val('');
         }
@@ -259,6 +275,7 @@
                 codigo: form.find('.' + form_element.codigo).val(),
                 razon_social: form.find('.' + form_element.razon_social).val(),
                 ruc: form.find('.' + form_element.ruc).val(),
+                rubro: form.find('.' + form_element.rubro).val(),
                 direccion: form.find('.' + form_element.direccion).val(),
                 telefono: form.find('.' + form_element.telefono).val()
             };
@@ -314,6 +331,7 @@
                 modal_edit_empresa.find('.' + form_element.codigo).val(empresa_data.codigo);
                 modal_edit_empresa.find('.' + form_element.razon_social).val(empresa_data.razon_social);
                 modal_edit_empresa.find('.' + form_element.ruc).val(empresa_data.ruc);
+                modal_edit_empresa.find('.' + form_element.rubro).val(empresa_data.rubro);
                 modal_edit_empresa.find('.' + form_element.direccion).val(empresa_data.direccion);
                 modal_edit_empresa.find('.' + form_element.telefono).val(empresa_data.telefono);
                 config_btn_edit_empresa(empresa_data);

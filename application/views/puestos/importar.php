@@ -34,6 +34,7 @@
 				</div>
 				<div class="modal-footer">
 					<button id="boton_subir2"  type="button" class="btn btn-save btn-s-md btn-primary">Importar</button>
+					<button id="boton_eliminar_registros"  type="button" class="btn btn-save btn-s-md btn-danger">Eliminar registros</button>
 				</div>
 			</div>
 		</div>
@@ -81,5 +82,29 @@
 		$("#boton_subir2").on('click', function() {
 			subirArchivos();
 		});
+
+
+		$("#boton_eliminar_registros").on('click', function (event) {
+			event.preventDefault();
+			var msg = confirm("¿Esta seguro de Eliminar los registros de Puestos de Trabajo?");
+			if (msg) {
+				$.ajax({
+					method: "POST",
+					dataType: 'json',
+					url: "<?php echo site_url('puestos/deleteall'); ?>",
+					data: {
+						delete: 1
+					}
+				}).done(function (response) {
+					if (response.status) {
+						alert(response.result);
+					} else {
+						alert(response.result);
+					}
+				});
+			}
+
+		});
+
 	});
 </script>

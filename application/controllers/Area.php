@@ -72,7 +72,18 @@ class Area extends CI_Controller
     public function getAll()
     {
         $arrayArea = array();
+//        $tmpLocales = Local_model::select('id')->whereRaw('id_empresa = ?', array($this->session->id_empresa))->get()->toArray();
+//        $idLocal = array();
+//		foreach ($tmpLocales as $id => $x) {
+//			array_push($idLocal, $x['id']);
+//        }
+//        print_r($idLocal);die();
+//        print_r(array(4,5,6,7,8));die();
+//        $area = Area_model::whereIn('id_local', array(4,5,6,7,8));
+//        print_r($area);die();
         $area = Area_model::has('local')->get();
+
+
         foreach ($area as $row_area) {
             if ($row_area->estado == 1) {
                 $empresa = Empresa_model::where(['id' => $row_area->local->id_empresa])->first();

@@ -17,10 +17,10 @@
 					<div class="row">
 						<div class="col-lg-6 col-md-6 col-sm-6">
 							<div class="form-group">
-								<label for="cmbLocal" class="col-md-2 control-label">Local</label>
+								<label for="cmbLocal" class="col-md-2 control-label">Sede</label>
 								<div class="col-md-10">
 									<select name="cmbLocal" id="cmbLocal" class="form-control" required>
-										<option value="">Seleccione Local</option>
+										<option value="">Seleccione Sede</option>
 										<?php
 										foreach ($locales as $value) {
 											echo '<option value="' . $value['id'] . '">' . $value['nombre'] . '</option>';
@@ -154,8 +154,7 @@
 					<div class="row">
 						<div class="col-lg-6 col-md-6 col-sm-6">
 							<div class="form-group">
-								<label for="cmbArea" class="control-label col-md-7">&Aacute;rea a la que pertenece el
-									puesto de trabajo</label>
+								<label for="cmbArea" class="control-label col-md-7">&Aacute;rea estandar</label>
 							</div>
 						</div>
 						<div class="col-lg-6 col-md-6 col-sm-6">
@@ -163,6 +162,20 @@
 								<select name="cmbArea" id="cmbArea" class="form-control" required>
 									<option value="">Seleccione Area</option>
 								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6 col-md-6 col-sm-6">
+							<div class="form-group">
+								<label for="cmbAreaPuesto" class="control-label col-md-7">&Aacute;rea a la que pertenece el
+									puesto de trabajo</label>
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6">
+							<div class="form-group">
+								<input type="text" id="cmbAreaPuesto" name="cmbAreaPuesto" class="form-control"
+									   placeholder="Ingrese Area de Puesto de Trabajo">
 							</div>
 						</div>
 					</div>
@@ -177,6 +190,38 @@
 							<div class="form-group">
 								<input type="text" id="txtFuncionPuesto" name="txtFuncionPuesto" class="form-control"
 									   placeholder="Ingrese funci&oacute;n de puesto">
+							</div>
+						</div>
+
+					</div>
+
+					<div class="row">
+						<div class="col-lg-6 col-md-6 col-sm-6">
+							<div class="form-group">
+								<label for="cmbTipoPuesto" class="control-label col-md-7">Tipo de Puesto de Trabajo</label>
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6">
+							<div class="form-group">
+								<select name="cmbTipoPuesto" id="cmbTipoPuesto" class="form-control">
+									<option value="CORE">CORE</option>
+									<option value="SOPORTE">SOPORTE</option>
+								</select>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="row">
+						<div class="col-lg-6 col-md-6 col-sm-6">
+							<div class="form-group">
+								<label for="txtCodigoUnificado" class="control-label col-md-7">Codigo UNIFICADO</label>
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6">
+							<div class="form-group">
+								<input type="text" id="txtCodigoUnificado" name="txtCodigoUnificado" class="form-control"
+									   placeholder="Codigo Unificado">
 							</div>
 						</div>
 
@@ -366,4 +411,4 @@
 			});
 		});
 	});
-</script>
+</script>@

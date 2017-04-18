@@ -15,7 +15,7 @@ class Empresa_model extends Eloquent {
     protected $table = 'empresa';
     protected $primaryKey = 'id';
     protected $fillable = ['codigo','razon_social','ruc','direccion','telefono',
-                            'usuario_creado','fecha_creado','usuario_modificado','fecha_modificado','estado'];
+                            'usuario_creado','fecha_creado','usuario_modificado','fecha_modificado','estado', 'rubro'];
 
     function local() {
         return $this->hasMany('Local_model', 'id_empresa');

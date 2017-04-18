@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>:: Puestos de Trabajo ::</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/components/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/components/select2/dist/css/select2.min.css">
@@ -16,6 +17,8 @@
 	<script type="text/javascript" src="<?php echo base_url(); ?>public/components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>public/components/datatables/media/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>public/components/datatables/media/js/dataTables.bootstrap.min.js"></script>
+<!--	<script type="text/javascript" src="--><?php //echo base_url(); ?><!--public/components/jspdf/dist/jspdf.debug.js"></script>-->
+<!--	<script type="text/javascript" src="--><?php //echo base_url(); ?><!--public/components/jspdf/libs/html2pdf.js"></script>-->
     <script src="<?php echo base_url(); ?>public/components/parsleyjs/dist/parsley.min.js"></script>
     <script src="<?php echo base_url(); ?>public/components/parsleyjs/dist/i18n/es.js"></script>
 

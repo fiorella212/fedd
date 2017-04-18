@@ -199,28 +199,8 @@ class Usuario extends CI_Controller
 		$email = $this->input->post('email');
         $usuario = Usuarios_model::where(['email' => $email,'estado' => 1])->first();
         if($usuario){
-            $mailSender = new PHPMailer();
-            $mailSender->isSMTP();
-            $mailSender->Host = "a2plcpnl0822.prod.iad2.secureserver.net";
-            $mailSender->SMTPAuth = true;
-            $mailSender->Username = "sistemas@gruposabha.com";
-            $mailSender->Password = "Sistemas4523";
-//		$mailSender->SMTPSecure = "tls";
-
-            $mailSender->setFrom('sistemas@gruposabha.com', 'Sistema Sabha');
-
-            $mailSender->addAddress($email, '');
-
-            $mailSender->isHTML(true);
-
-            $mailSender->Subject = "Recuperacion de Correo";
-            $mailSender->Body = "Cuerpo de Mensaje - Recuperacion de Correo";
-            $mailSender->AltBody = "Usuario :". $usuario->usuario .'<br/>'. "Contraseña :". $usuario->contrasena;
-            if ($mailSender->send()) {
-                $response['result'] = "Se ha enviado un correo con sus datos de acceso.";
-            } else {
-                $response['result'] = "Ocurrio un problema en el envio de correo, intentelo nuevamente.";
-            }
+            $response['status'] = true;
+            $response['usuario'] = $usuario->usuario;
         }else{
             $response['result'] = "No existe usuario relacionado al correo proporcionado.";
         }
@@ -228,6 +208,30 @@ class Usuario extends CI_Controller
 
 		echo json_encode($response);
 	}
+
+    public function actualizarcontrasena(){
+        $result = array('status' => false, 'result' => null);
+        $email = $this->input->post('email');
+        $contrasena= $this->input->post('password');
+
+        try {
+            $usuario = Usuarios_model::where(['email' => $email,'estado' => 1])->first();
+            $usuario->contrasena = encriptar($contrasena);
+            $usuario->estado = 1;
+            $usuario->usuario_modificado = $usuario->usuario;
+            $usuario->fecha_modificado = date('Y-m-d H:i:s');
+
+            $usuario->save();
+
+            $result['status'] = true;
+            $result['result'] = 'Se actualizo la contraseña del usuario';
+
+        } catch (Exception $e) {
+            $result['result'] = $e->getMessage();
+
+        }
+        echo json_encode($result);
+    }
 
 
 	public function exportar()

@@ -12,10 +12,10 @@
 					<div class="row">
 						<div class="col-lg-6 col-md-6 col-sm-6">
 							<div class="form-group">
-								<label for="cmbLocal" class="col-md-4 control-label">Local</label>
+								<label for="cmbLocal" class="col-md-4 control-label">Sede</label>
 								<div class="col-md-8">
 									<select name="cmbLocal" id="cmbLocal" class="form-control">
-										<option value="">Seleccione Local</option>
+										<option value="">Seleccione Sede</option>
 										<?php
 										foreach ($locales as $value) {
 											echo '<option value="' . $value['id'] . '">' . $value['nombre'] . '</option>';

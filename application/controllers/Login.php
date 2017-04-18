@@ -59,7 +59,7 @@ class Login extends CI_Controller
 						'permisos' => $this->getPermisos($usuario->id_rol)
 					);
 					$this->session->set_userdata($data_user);
-					redirect('puestos');
+					redirect('main');
 				} else {
 					$data['error'] = 'El usuario y/o contraseña son incorrectos';
 					$this->load->view('header');

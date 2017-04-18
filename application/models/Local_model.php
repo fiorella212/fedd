@@ -15,7 +15,7 @@ class Local_model extends Eloquent {
     protected $table = 'local';
     protected $primaryKey = 'id';
     protected $fillable = ['codigo','id_empresa','nombre','direccion','encargado','telefono','email',
-        'usuario_creado' ,'fecha_creado','usuario_modificado','fecha_modificado','estado'];
+        'usuario_creado' ,'fecha_creado','usuario_modificado','fecha_modificado','estado', 'ubicacion'];
 
     function empresa() {
         return $this->belongsTo('Empresa_model', 'id_empresa');

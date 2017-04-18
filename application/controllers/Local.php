@@ -50,6 +50,7 @@ class Local extends CI_Controller
     public function getAll()
     {
         $arrayLocal = array();
+//        $local = Local_model::whereRaw('id_empresa = ? AND estado = 1', array($this->session->id_empresa))->get();
         $local = Local_model::has('empresa')->get();
         foreach ($local as $row_local) {
             if ($row_local->estado != 0) {
@@ -59,6 +60,7 @@ class Local extends CI_Controller
                     'id_local' => $row_local->id,
                     'nombre' => $row_local->nombre,
                     'direccion' => $row_local->direccion,
+                    'ubicacion' => $row_local->ubicacion,
                     'encargado' => $row_local->encargado,
                     'telefono' => $row_local->telefono,
                     'email' => $row_local->email
@@ -87,12 +89,14 @@ class Local extends CI_Controller
             $encargado = $this->input->post('encargado');
             $telefono = $this->input->post('telefono');
             $email = $this->input->post('email');
+            $ubicacion = $this->input->post('ubicacion');
 
             try {
                 $local = new Local_model();
                 $local->id_empresa = $empresa_id;
                 $local->nombre = $nombre;
                 $local->direccion = $direccion;
+                $local->ubicacion = $ubicacion;
                 $local->encargado = $encargado;
                 $local->telefono = $telefono;
                 $local->email = $email;
@@ -140,12 +144,14 @@ class Local extends CI_Controller
             $encargado = $this->input->post('encargado');
             $telefono = $this->input->post('telefono');
             $email = $this->input->post('email');
+			$ubicacion = $this->input->post('ubicacion');
 
             try {
                 $local = Local_model::find($id);
                 $local->id_empresa = $empresa_id;
                 $local->nombre = $nombre;
                 $local->direccion = $direccion;
+                $local->ubicacion = $ubicacion;
                 $local->encargado = $encargado;
                 $local->telefono = $telefono;
                 $local->email = $email;

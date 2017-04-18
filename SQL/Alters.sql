@@ -1,3 +1,22 @@
+ALTER TABLE `puesto_trabajo` ADD `id_empresa_sap` VARCHAR(11)  NULL  DEFAULT NULL  AFTER `codigo_unificado`;
+ALTER TABLE `puesto_trabajo` ADD `id_local_sap` VARCHAR(11)  NULL  DEFAULT NULL  AFTER `id_empresa_sap`;
+
+
+
+-- 05/04/2017
+
+ALTER TABLE `puesto_trabajo` ADD `area_puesto` VARCHAR(255)  NULL  DEFAULT NULL  AFTER `tipo_puesto`;
+ALTER TABLE `puesto_trabajo` ADD `codigo_unificado` VARCHAR(255)  NULL  DEFAULT NULL  AFTER `area_puesto`;
+ALTER TABLE `empresa` ADD `rubro` VARCHAR(250)  NULL  DEFAULT NULL  AFTER `estado`;
+ALTER TABLE `local` ADD `ubicacion` VARCHAR(250)  NULL  DEFAULT NULL  AFTER `estado`;
+
+
+
+
+----------------
+
+
+
 ALTER TABLE db_puestos.pregunta_siso ADD estado TINYINT NOT NULL ;
 
 ALTER TABLE db_puestos.pregunta_siso ADD `usuario_creado` varchar(250) NOT NULL;
@@ -35,3 +54,6 @@ ALTER TABLE db_puestos.area ADD CONSTRAINT area_local_UN UNIQUE KEY (id_local, n
 
 
 ALTER TABLE db_puestos.pregunta_siso ADD CONSTRAINT pregunta_siso_UN UNIQUE KEY (pregunuta) ;
+
+alter table personal add column id_empresa int;
+alter table personal add column sede_estudio varchar(255);

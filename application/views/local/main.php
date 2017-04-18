@@ -3,7 +3,7 @@
 	<div class="col-lg-12 col-md-12 col-sm-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h5 class="text-center">Locales</h5>
+				<h5 class="text-center">Sedes</h5>
 			</div>
 			<div class="panel-body">
 
@@ -16,8 +16,9 @@
 					<th>id_empresa</th>
 					<th>Raz&oacute;n Social</th>
                     <th>id_local</th>
-					<th>Local</th>
+					<th>Sede</th>
 					<th>Direcci&oacute;n</th>
+					<th>Ubicaci&oacute;n</th>
 					<th>Encargado</th>
 					<th>Tel&eacute;fono</th>
 					<th>Email</th>
@@ -39,7 +40,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Nuevo Local</h4>
+				<h4 class="modal-title">Nueva Sede</h4>
 			</div>
 			<div class="modal-body">
 
@@ -70,6 +71,12 @@
 						</div>
 					</div>
 					<div class="form-group">
+						<label for="txtUbicacionLocal" class="col-sm-2 control-label">Ubicaci&oacute;n</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control required ubicacion" required id="txtUbicacionLocal" placeholder="Ubicacion">
+						</div>
+					</div>
+					<div class="form-group">
 						<label for="txtEncargadoLocal" class="col-sm-2 control-label">Encargado</label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control required encargado" required id="txtEncargadoLocal" placeholder="Encargado">
@@ -92,7 +99,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-				<button type="button" class="btn btn-primary btn-save">Registrar Local</button>
+				<button type="button" class="btn btn-primary btn-save">Registrar Sede</button>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
@@ -103,7 +110,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Actualizar Local</h4>
+                <h4 class="modal-title">Actualizar Sede</h4>
             </div>
             <div class="modal-body">
 
@@ -133,6 +140,12 @@
                             <input type="text" class="form-control required direccion" required id="txtDireccionLocal" placeholder="Direccion">
                         </div>
                     </div>
+					<div class="form-group">
+						<label for="txtUbicacionLocal" class="col-sm-2 control-label">Ubicaci&oacute;n</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control required ubicacion" required id="txtUbicacionLocal" placeholder="Ubicacion">
+						</div>
+					</div>
                     <div class="form-group">
                         <label for="txtEncargadoLocal" class="col-sm-2 control-label">Encargado</label>
                         <div class="col-sm-10">
@@ -156,7 +169,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary btn-edit">Actualizar Local</button>
+                <button type="button" class="btn btn-primary btn-edit">Actualizar Sede</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -167,10 +180,10 @@
         <div class="modal-content">
             <div class="modal-header bg-danger">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h5 class="modal-title font-bold">Eliminar Local</h5>
+                <h5 class="modal-title font-bold">Eliminar Sede</h5>
             </div>
             <div class="modal-body">
-                <p>¿Desea eliminar el local?</p>
+                <p>¿Desea eliminar sede?</p>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -193,6 +206,7 @@
                 id_empresa: 'id_empresa',
                 nombre: 'nombre',
                 direccion: 'direccion',
+                ubicacion: 'ubicacion',
                 encargado: 'encargado',
                 telefono: 'telefono',
                 email: 'email'
@@ -247,6 +261,7 @@
                     {"data": "id_local"},
                     {"data": "nombre"},
                     {"data": "direccion"},
+                    {"data": "ubicacion"},
                     {"data": "encargado"},
                     {"data": "telefono"},
                     {"data": "email"}
@@ -267,7 +282,7 @@
                         "visible": false
                     },
                     {
-                        "targets": [8],
+                        "targets": [9],
                         "data": null,
                         "defaultContent": '<button class="btn btn-warning btn-xs m-l-n m-r-n btn-edit">Editar</button>' +
                         '  <button class="btn btn-danger btn-xs m-l-n m-r-n btn-delete">Eliminar</button>'
@@ -281,6 +296,7 @@
             modal.find('.' + form_element.id_empresa).val('').trigger("change");
             modal.find('.' + form_element.nombre).val('');
             modal.find('.' + form_element.direccion).val('');
+            modal.find('.' + form_element.ubicacion).val('');
             modal.find('.' + form_element.encargado).val('');
             modal.find('.' + form_element.telefono).val('');
             modal.find('.' + form_element.email).val('');
@@ -290,6 +306,7 @@
                 id_empresa: form.find('.' + form_element.id_empresa).val(),
                 nombre: form.find('.' + form_element.nombre).val(),
                 direccion: form.find('.' + form_element.direccion).val(),
+                ubicacion: form.find('.' + form_element.ubicacion).val(),
                 encargado: form.find('.' + form_element.encargado).val(),
                 telefono: form.find('.' + form_element.telefono).val(),
                 email: form.find('.' + form_element.email).val(),
@@ -346,6 +363,7 @@
                 modal_edit_local.find('.' + form_element.id_empresa).val(local_data.id_empresa).trigger("change");;
                 modal_edit_local.find('.' + form_element.nombre).val(local_data.nombre);
                 modal_edit_local.find('.' + form_element.direccion).val(local_data.direccion);
+                modal_edit_local.find('.' + form_element.ubicacion).val(local_data.ubicacion);
                 modal_edit_local.find('.' + form_element.encargado).val(local_data.encargado);
                 modal_edit_local.find('.' + form_element.telefono).val(local_data.telefono);
                 modal_edit_local.find('.' + form_element.email).val(local_data.email);

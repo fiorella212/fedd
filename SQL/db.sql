@@ -28,7 +28,7 @@ CREATE TABLE `area` (
   `id_local` int(10) unsigned NOT NULL,
   `usuario_creado` varchar(250) DEFAULT NULL,
   `fecha_creado` datetime DEFAULT NULL,
-  `usuario_modificado` varchar(250) NOT NULL,
+  `usuario_modificado` varchar(250) DEFAULT NULL,
   `fecha_modificado` datetime DEFAULT NULL,
   `estado` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
@@ -85,9 +85,9 @@ CREATE TABLE `cuestionario_siso` (
   `id_puesto_trabajo` int(10) unsigned NOT NULL,
   `id_pregunta_siso` int(10) unsigned NOT NULL,
   `respuesta` tinyint(1) DEFAULT NULL,
-  `usuario_creado` varchar(250) NOT NULL,
+  `usuario_creado` varchar(250) DEFAULT NULL,
   `fecha_creado` datetime DEFAULT NULL,
-  `usuario_modificado` varchar(250) NOT NULL,
+  `usuario_modificado` varchar(250) DEFAULT NULL,
   `fecha_modificado` datetime DEFAULT NULL,
   `estado` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
@@ -148,9 +148,9 @@ CREATE TABLE `empresa` (
   `ruc` varchar(12) DEFAULT NULL,
   `direccion` varchar(250) DEFAULT NULL,
   `telefono` varchar(12) DEFAULT NULL,
-  `usuario_creado` varchar(250) NOT NULL,
+  `usuario_creado` varchar(250) DEFAULT NULL,
   `fecha_creado` datetime DEFAULT NULL,
-  `usuario_modificado` varchar(250) NOT NULL,
+  `usuario_modificado` varchar(250) DEFAULT NULL,
   `fecha_modificado` datetime DEFAULT NULL,
   `estado` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
@@ -211,9 +211,9 @@ CREATE TABLE `local` (
   `encargado` varchar(250) DEFAULT NULL,
   `telefono` varchar(12) DEFAULT NULL,
   `email` varchar(250) DEFAULT NULL,
-  `usuario_creado` varchar(250) NOT NULL,
+  `usuario_creado` varchar(250) DEFAULT NULL,
   `fecha_creado` datetime DEFAULT NULL,
-  `usuario_modificado` varchar(250) NOT NULL,
+  `usuario_modificado` varchar(250) DEFAULT NULL,
   `fecha_modificado` datetime DEFAULT NULL,
   `estado` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
@@ -317,27 +317,30 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `personal`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `personal` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `planilla` varchar(45) DEFAULT NULL,
-  `codigo_sap` varchar(45) DEFAULT NULL,
-  `fecha_ingreso` date DEFAULT NULL,
-  `nombres_trabajador` varchar(200) DEFAULT NULL,
-  `apellidos_trabajador` varchar(200) DEFAULT NULL,
-  `regimen` varchar(100) DEFAULT NULL,
-  `sede` varchar(100) DEFAULT NULL,
-  `denominacion_sap` varchar(100) DEFAULT NULL,
-  `area` varchar(100) DEFAULT NULL,
-  `fecha_nacimiento` date DEFAULT NULL,
-  `sexo` enum('M','F') DEFAULT NULL,
-  `anos_res_jubilacion` int(11) DEFAULT NULL,
-  `ano_jubilacion` int(11) DEFAULT NULL,
-  `dni` int(11) DEFAULT NULL,
-  `codigo_trabajador` varchar(45) DEFAULT NULL,
-  `gerencia` varchar(45) DEFAULT NULL,
-  `id_empresa` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `personal` (  `id` INT NOT NULL AUTO_INCREMENT,  `id_empresa_sap` VARCHAR(45) NULL,  `empresa_nombre_sap` VARCHAR(250) NULL,  `id_sede_sap` VARCHAR(45) NULL,  `sede_nombre_sap` VARCHAR(250) NULL,  `area_nombre` VARCHAR(250) NULL,  `codigo_puesto_creado` VARCHAR(45) NULL,  `codigo_sabha` VARCHAR(45) NULL,  `consultoria` VARCHAR(45) NULL,  `codigo_puesto` VARCHAR(45) NULL,  `nombre_puesto` VARCHAR(150) NULL,  `genero` ENUM('Masculino', 'Femenino') NULL,  `num_colaborador` BIGINT NULL,  `nombres_apellidos` VARCHAR(250) NULL,  `fecha_nacimiento` DATE NULL,  `fecha_ingreso` DATE NULL,  `id_empresa` int NULL,  PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# CREATE TABLE `personal` (
+#   `id` int(11) NOT NULL AUTO_INCREMENT,
+#   `planilla` varchar(45) DEFAULT NULL,
+#   `codigo_sap` varchar(45) DEFAULT NULL,
+#   `fecha_ingreso` date DEFAULT NULL,
+#   `nombres_trabajador` varchar(200) DEFAULT NULL,
+#   `apellidos_trabajador` varchar(200) DEFAULT NULL,
+#   `regimen` varchar(100) DEFAULT NULL,
+#   `sede` varchar(100) DEFAULT NULL,
+#   `denominacion_sap` varchar(100) DEFAULT NULL,
+#   `area` varchar(100) DEFAULT NULL,
+#   `fecha_nacimiento` date DEFAULT NULL,
+#   `sexo` enum('M','F') DEFAULT NULL,
+#   `anos_res_jubilacion` int(11) DEFAULT NULL,
+#   `ano_jubilacion` int(11) DEFAULT NULL,
+#   `dni` int(11) DEFAULT NULL,
+#   `codigo_trabajador` varchar(45) DEFAULT NULL,
+#   `gerencia` varchar(45) DEFAULT NULL,
+#   `id_empresa` int(11) DEFAULT NULL,
+#   PRIMARY KEY (`id`)
+# ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -448,13 +451,13 @@ CREATE TABLE `pregunta_siso` (
   `valor_m_ext_superior` int(11) DEFAULT NULL,
   `valor_m_intelectual` int(11) DEFAULT NULL,
   `valor_m_psicosocial` int(11) DEFAULT NULL,
-  `estado` tinyint(4) NOT NULL,
-  `usuario_creado` varchar(250) NOT NULL,
+  `estado` tinyint(4) DEFAULT NULL,
+  `usuario_creado` varchar(250) DEFAULT NULL,
   `fecha_creado` datetime DEFAULT NULL,
-  `usuario_modificado` varchar(250) NOT NULL,
+  `usuario_modificado` varchar(250) DEFAULT NULL,
   `fecha_modificado` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -463,7 +466,7 @@ CREATE TABLE `pregunta_siso` (
 
 LOCK TABLES `pregunta_siso` WRITE;
 /*!40000 ALTER TABLE `pregunta_siso` DISABLE KEYS */;
-INSERT INTO `pregunta_siso` VALUES (1,'Se realiza alguna tarea por encima de 1.80m, o dentro de un espacio confinado (accesos restringidos), o trabajos con llamas o chispas?','Seguridad en el puesto de trabajo','Entorno',0,0,0,0,0,0,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(2,'Se encuentra por encima del primer piso y se accede mediante escaleras o ascensores?','Seguridad en el puesto de trabajo','Entorno',2,2,0,0,NULL,NULL,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(3,'Existen altos niveles de ruido?','Seguridad en el puesto de trabajo','Entorno',NULL,1,NULL,NULL,4,4,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(4,'Tiene cambios bruscos de temperatura (calor, frío, humedad)?','Seguridad en el puesto de trabajo','Entorno',NULL,NULL,1,1,NULL,NULL,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(5,'El puesto esta expuesto a Radiacion Solar en forma directa?','Seguridad en el puesto de trabajo','Entorno',2,NULL,NULL,NULL,NULL,NULL,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(6,'El puesto requiere completar formatos de Analisis de Riesgo (Permisos de Trabajo de Riesgo, AST o ATS, etc)?','Seguridad en el puesto de trabajo','Entorno',0,0,1,1,0,0,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(7,'Tienen elementos giratorios o que se desplazan en forma vertical u horizontal?','Seguridad en el puesto de trabajo','Equipos y Herramientas',0,0,0,0,0,NULL,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(8,'Esta expuesto a vibraciones debido a Herramientas o Uso de Equipos?','Seguridad en el puesto de trabajo','Equipos y Herramientas',NULL,NULL,0,0,NULL,0,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(9,'Cerca al puesto de trabajo circulan vehículos o equipos?','Seguridad en el puesto de trabajo','Equipos y Herramientas',1,0,0,1,0,NULL,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(10,'Tiene carcasa de metal y estan alimentados por Energia Electrica?','Seguridad en el puesto de trabajo','Equipos y Herramientas',1,NULL,NULL,0,0,1,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(11,'En el puesto de trabajo se manipulan frecuentemente cargas (para levantar, trasladar, posicionar, etc)? ','Seguridad en el puesto de trabajo','Materiales',1,1,0,0,0,1,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(12,'Existe peligro vinculado a control de Presión o control de Temperatura en relacion al proceso productivo?','Seguridad en el Proceso','Proceso',1,1,1,1,1,NULL,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(13,'Existe peligro vinculado a control de concentracion, proporciones o mezcla de productos químicos en el proceso productivo?','Seguridad en el Proceso','Proceso',1,2,2,1,0,NULL,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(14,'El Proceso Productivo es tan crítico que requiere de inspecciones, controles o mantenimientos continuos de equipos o máquinas?','Seguridad en el Proceso','Proceso',0,0,0,0,0,1,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(15,'El Proceso Productivo requiere utilizar fuentes de calor con llamas, calderos, reactores o superficies calientes?','Seguridad en el Proceso','Proceso',1,1,1,1,1,0,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(16,'El Proceso Productivo se desarrolla en atmosferas explosivas o tóxicas?','Seguridad en el Proceso','Proceso',0,0,0,0,0,0,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(17,'Una falla en el proceso productivo puede liberar gases, liquidos o materiales muy toxicos o contaminantes?','Seguridad en el Proceso','Proceso',0,0,0,0,0,0,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(18,'Existen cargas suspendidas por encima del puesto de trabajo en algun momento?','Seguridad en el puesto de trabajo','Materiales',1,0,0,2,0,NULL,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(19,'Los materiales o insumos que utiliza son peligrosos y/o tóxicos?','Seguridad en el puesto de trabajo','Materiales',0,0,1,1,0,NULL,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(20,'147','Seguridad en el Proceso','Entorno',2,NULL,0,2,NULL,NULL,0,'','2017-02-24 18:36:58','admin','2017-02-24 18:41:20'),(21,'Pregunta a Eliminar','Seguridad en el Proceso','Equipos y Herramientas',2,3,0,2,NULL,NULL,0,'','2017-02-24 18:36:58','admin','2017-02-24 18:41:10'),(22,'Pregunta para Validar','Seguridad en el Proceso','Equipos y Herramientas',0,NULL,4,4,NULL,NULL,1,'admin','2017-02-26 21:50:21','','2017-02-26 21:50:21'),(23,'Pregunta para Borrarr 2','Seguridad en el Proceso','Equipos y Herramientas',4,NULL,NULL,NULL,NULL,NULL,1,'admin','2017-02-26 21:53:28','','2017-02-26 21:53:28'),(24,'Sera?','Seguridad en el Puesto de trabajo','Equipos y Herramientas',NULL,NULL,NULL,NULL,NULL,5,1,'admin','2017-02-26 23:12:26','','2017-02-26 23:12:26'),(25,'Sera?','Seguridad en el Puesto de trabajo','Equipos y Herramientas',NULL,NULL,NULL,NULL,NULL,5,1,'admin','2017-02-26 23:13:36','','2017-02-26 23:13:36');
+INSERT INTO `pregunta_siso` VALUES (1,'Se realiza alguna tarea por encima de 1.80m, o dentro de un espacio confinado (accesos restringidos), o trabajos con llamas o chispas?','Seguridad en el puesto de trabajo','Entorno',0,0,0,0,0,0,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(2,'Se encuentra por encima del primer piso y se accede mediante escaleras o ascensores?','Seguridad en el puesto de trabajo','Entorno',2,2,0,0,NULL,NULL,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(3,'Existen altos niveles de ruido?','Seguridad en el puesto de trabajo','Entorno',NULL,1,NULL,NULL,4,4,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(4,'Tiene cambios bruscos de temperatura (calor, frío, humedad)?','Seguridad en el puesto de trabajo','Entorno',NULL,NULL,1,1,NULL,NULL,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(5,'El puesto esta expuesto a Radiacion Solar en forma directa?','Seguridad en el puesto de trabajo','Entorno',2,NULL,NULL,NULL,NULL,NULL,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(6,'El puesto requiere completar formatos de Analisis de Riesgo (Permisos de Trabajo de Riesgo, AST o ATS, etc)?','Seguridad en el puesto de trabajo','Entorno',0,0,1,1,0,0,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(7,'Tienen elementos giratorios o que se desplazan en forma vertical u horizontal?','Seguridad en el puesto de trabajo','Equipos y Herramientas',0,0,0,0,0,NULL,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(8,'Esta expuesto a vibraciones debido a Herramientas o Uso de Equipos?','Seguridad en el puesto de trabajo','Equipos y Herramientas',NULL,NULL,0,0,NULL,0,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(9,'Cerca al puesto de trabajo circulan vehículos o equipos?','Seguridad en el puesto de trabajo','Equipos y Herramientas',1,0,0,1,0,NULL,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(10,'Tiene carcasa de metal y estan alimentados por Energia Electrica?','Seguridad en el puesto de trabajo','Equipos y Herramientas',1,NULL,NULL,0,0,1,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(11,'En el puesto de trabajo se manipulan frecuentemente cargas (para levantar, trasladar, posicionar, etc)? ','Seguridad en el puesto de trabajo','Materiales',1,1,0,0,0,1,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(12,'Existe peligro vinculado a control de Presión o control de Temperatura en relacion al proceso productivo?','Seguridad en el Proceso','Proceso',1,1,1,1,1,NULL,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(13,'Existe peligro vinculado a control de concentracion, proporciones o mezcla de productos químicos en el proceso productivo?','Seguridad en el Proceso','Proceso',1,2,2,1,0,NULL,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(14,'El Proceso Productivo es tan crítico que requiere de inspecciones, controles o mantenimientos continuos de equipos o máquinas?','Seguridad en el Proceso','Proceso',0,0,0,0,0,1,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(15,'El Proceso Productivo requiere utilizar fuentes de calor con llamas, calderos, reactores o superficies calientes?','Seguridad en el Proceso','Proceso',1,1,1,1,1,0,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(16,'El Proceso Productivo se desarrolla en atmosferas explosivas o tóxicas?','Seguridad en el Proceso','Proceso',0,0,0,0,0,0,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(17,'Una falla en el proceso productivo puede liberar gases, liquidos o materiales muy toxicos o contaminantes?','Seguridad en el Proceso','Proceso',0,0,0,0,0,0,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(18,'Existen cargas suspendidas por encima del puesto de trabajo en algun momento?','Seguridad en el puesto de trabajo','Materiales',1,0,0,2,0,NULL,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09'),(19,'Los materiales o insumos que utiliza son peligrosos y/o tóxicos?','Seguridad en el puesto de trabajo','Materiales',0,0,1,1,0,NULL,1,'','2017-02-24 18:36:58','','2017-02-24 18:37:09');
 /*!40000 ALTER TABLE `pregunta_siso` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -510,7 +513,7 @@ CREATE TABLE `puesto_trabajo` (
   `entrevistado_email` varchar(250) DEFAULT NULL,
   `eva_erin_resultado` varchar(250) DEFAULT NULL,
   `eva_erin_observaciones` text,
-  `id_cuestionario_siso` int(11) NOT NULL,
+  `id_cuestionario_siso` int(11) DEFAULT NULL,
   `siso_s_visual` int(11) DEFAULT NULL,
   `siso_s_auditivo` int(11) DEFAULT NULL,
   `siso_m_ext_inferior` int(11) DEFAULT NULL,
@@ -567,9 +570,9 @@ CREATE TABLE `puesto_trabajo` (
   `aplica_ajutes` mediumtext,
   `estado_registro` varchar(250) DEFAULT NULL,
   `notas` text,
-  `usuario_creado` varchar(250) NOT NULL,
+  `usuario_creado` varchar(250) DEFAULT NULL,
   `fecha_creado` datetime DEFAULT NULL,
-  `usuario_modificado` varchar(250) NOT NULL,
+  `usuario_modificado` varchar(250) DEFAULT NULL,
   `fecha_modificado` datetime DEFAULT NULL,
   `estado` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
@@ -742,9 +745,9 @@ CREATE TABLE `usuarios` (
   `contrasena` varchar(250) DEFAULT NULL,
   `id_rol` int(11) unsigned NOT NULL,
   `id_empresa` int(11) DEFAULT NULL,
-  `usuario_creado` varchar(250) NOT NULL,
+  `usuario_creado` varchar(250) DEFAULT NULL,
   `fecha_creado` datetime DEFAULT NULL,
-  `usuario_modificado` varchar(250) NOT NULL,
+  `usuario_modificado` varchar(250) DEFAULT NULL,
   `fecha_modificado` datetime DEFAULT NULL,
   `estado` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
@@ -759,7 +762,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'admin','admin','111','admin@admin.com','admin','JELgOlfYfMk4JPNYdphYJC/msBGL8tGVmJOt4l0G1dQ=',1,1,'','2017-02-04 22:06:50','admin','2017-03-01 11:21:54',1);
+INSERT INTO `usuarios` VALUES (1,'admin','admin','111','admin@admin.com','admin','b09DMHUxb3VROUk2Umg1TTRNMGdHZz09',1,1,'','2017-02-04 22:06:50','admin','2017-03-01 11:21:54',1);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

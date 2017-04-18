@@ -255,6 +255,14 @@ class Rol extends CI_Controller
                     || $value->permiso == 'MANT. ROLES' || $value->permiso == 'MANT. USUARIO' || $value->permiso == 'CONFIGURACION SISO') {
                     $importar = '';
                 }
+				if($value->permiso == 'REPORTE PUESTOS' || $value->permiso == 'REPORTE TABLA 1' || $value->permiso == 'REPORTE TABLA 3'
+					|| $value->permiso == 'REPORTE TABLA 4' || $value->permiso == 'REPORTE TABLA 5' || $value->permiso == 'REPORTE TABLA 6'
+					|| $value->permiso == 'REPORTE TABLA 7'){
+                    $agregar = '';
+                    $editar = '';
+                    $eliminar = '';
+                    $importar = '';
+                }
 
                 $array = array(
                     $value->nombre ,

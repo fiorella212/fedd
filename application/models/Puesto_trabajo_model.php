@@ -28,7 +28,12 @@ class Puesto_trabajo_model extends Eloquent {
                             'resultado_pt_m_ext_sup','resultado_pt_m_intelectual','resultado_pt_m_psicosocial',
                             'resultado_final_s_visual','resultado_final_s_auditivo','resultado_final_m_ext_inf','resultado_final_m_ext_sup',
                             'resultado_final_m_intelectual','resultado_final_m_psicosocial','es_apto','aplica_ajutes','estado_registro',
-                            'notas', 'id_empresa', 'usuario_creado','fecha_creado','usuario_modificado','fecha_modificado','estado'];
+                            'notas', 'id_empresa', 'usuario_creado','fecha_creado','usuario_modificado','fecha_modificado','estado', 'tipo_puesto',
+							'area_puesto', 'codigo_unificado', 'id_empresa_sap', 'id_local_sap', 'nombre_local'];
+	protected $casts = [
+		'id_empresa_sap' => 'string',
+		'id_local_sap' => 'string'];
+
 
     function local() {
         return $this->belongsTo('Local_model', 'id_local');

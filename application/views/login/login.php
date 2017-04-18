@@ -45,7 +45,7 @@
 	</div>
 	
 	<div class="col-sm-3 col-sm-offset-9">
-		<img src="<?php echo base_url("public/images/logo_gloria.png"); ?>">
+		<img src="<?php echo base_url("public/images/logo_cliente.png"); ?>">
 	</div>
 	<div class="clearfix"></div>
 	<div class="clearfix"></div>

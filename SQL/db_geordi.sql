@@ -130,27 +130,26 @@ CREATE TABLE `permisos` (
 LOCK TABLES `permisos` WRITE;
 /*!40000 ALTER TABLE `permisos` DISABLE KEYS */;
 
-INSERT INTO `permisos` (`id`, `nombre`, `base_url`)
-VALUES
-	(1,'MANT. PUESTOS DE TRABAJO','puestos'),
-	(2,'IMPORTAR PERSONAL SAP','personal'),
-	(3,'MANT. EMPRESA','empresa'),
-	(4,'MANT. LOCAL','local'),
-	(5,'MANT. AREA','area'),
-	(6,'EVALUACION EVA-ERIN','evaerin'),
-	(7,'EVALUACION SISO','siso'),
-	(8,'EVALUACION FEDD','fedd'),
-	(9,'REPORTE INTERNO','reporte'),
-	(10,'MANT. ROLES','rol'),
-	(11,'MANT. USUARIO','usuario'),
-	(12,'CONFIGURACION SISO','siso/configuracion'),
-	(13,'REPORTE PUESTOS','reporte/reportePuestos'),
-	(14,'REPORTE TABLA 6','reporte/reporteAptitud'),
-	(15,'REPORTE TABLA 5','reporte/reporteLocalArea'),
-	(16,'REPORTE TABLA 3','reporte/reporteProduccionArea'),
-	(17,'REPORTE TABLA 1','reporte/reporteLocal'),
-	(18,'REPORTE TABLA 4','reporte/reporteFuncionalidad'),
-	(19,'REPORTE TABLA 7','reporte/reporteContingencia');
+INSERT INTO `permisos` (`id`, `nombre`, `base_url`) VALUES
+(1, 'MANT. PUESTOS DE TRABAJO', 'puestos'),
+(2, 'IMPORTAR PERSONAL SAP',  'personal'),
+(3, 'MANT. EMPRESA',  'empresa'),
+(4, 'MANT. SEDE', 'local'),
+(5, 'MANT. AREA', 'area'),
+(6, 'EVALUACION EVA-ERIN',  'evaerin'),
+(7, 'EVALUACION SISO',  'siso'),
+(8, 'EVALUACION FEDD',  'fedd'),
+(9, 'REPORTE INTERNO',  'reporte'),
+(10,  'MANT. ROLES',  'rol'),
+(11,  'MANT. USUARIO',  'usuario'),
+(12,  'CONFIGURACION SISO', 'siso/configuracion'),
+(13,  'REPORTE PUESTOS',  'reporte/reportePuestos'),
+(14,  'APTITUD DE LOS PUESTOS', 'reporte/reporteAptitud'),
+(15,  'RIESGO POR SEDE',  'reporte/reporteLocalArea'),
+(16,  'PUESTOS POR ACTIVIDAD',  'reporte/reporteProduccionArea'),
+(17,  'PUESTOS POR EMPRESA',  'reporte/reporteLocal'),
+(18,  'FUNCIONALIDAD POR PUESTO', 'reporte/reporteFuncionalidad'),
+(19,  'REDUCCION DE CONTINGENCIA',  'reporte/reporteContingencia');
 
 /*!40000 ALTER TABLE `permisos` ENABLE KEYS */;
 UNLOCK TABLES;

@@ -170,14 +170,14 @@ class Usuario extends CI_Controller
             $id = $this->input->post('id');
 
             try {
-                $usuario = Usuarios_model::find($id);
-
-                $usuario->estado = 0;
-                $usuario->usuario_modificado = $this->session->userdata('usuario');
-                $usuario->fecha_modificado = date('Y-m-d H:i:s');
-
-
-                $usuario->save();
+                 Usuarios_model::destroy($id);
+//
+//                $usuario->estado = 0;
+//                $usuario->usuario_modificado = $this->session->userdata('usuario');
+//                $usuario->fecha_modificado = date('Y-m-d H:i:s');
+//
+//
+//                $usuario->save();
 
                 $result['status'] = true;
                 $result['result'] = 'Se elimino el usuario satisfactoriamente.';

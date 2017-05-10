@@ -30,13 +30,13 @@
                     <?php if(array_key_exists('local',$permisos)){
                     if($permisos['local']['acceso'] == 1){
                     ?>
-		            <li><a href="<?php echo site_url('local')?>">Local</a></li>
+		            <li><a href="<?php echo site_url('local')?>">Sede</a></li>
                     <?php }
                     } ?>
                     <?php if(array_key_exists('area',$permisos)){
                     if($permisos['area']['acceso'] == 1){
                     ?>
-		            <li><a href="<?php echo site_url('area')?>">Area</a></li>
+		            <li><a href="<?php echo site_url('area')?>">&Aacute;rea est&aacute;ndar</a></li>
                     <?php }
                     } ?>
 		          </ul>
@@ -101,14 +101,14 @@
 			  if(array_key_exists('reporte/reporteLocal',$permisos)){
 				  if($permisos['reporte/reporteLocal']['acceso'] == 1){
 					  ?>
-					  <li><a href="<?php echo site_url('reporte/reporteLocal')?>">Reporte Tabla 1</a></li>
+					  <li><a href="<?php echo site_url('reporte/reporteLocal')?>">Puestos por Empresa</a></li>
 					  <?php
 				  }
 			  }
 			  if(array_key_exists('reporte/reporteLocalArea',$permisos)){
 				  if($permisos['reporte/reporteLocalArea']['acceso'] == 1){
 					  ?>
-					  <li><a href="<?php echo site_url('reporte/reporteLocalArea')?>">Reporte Tabla 3</a></li>
+					  <li><a href="<?php echo site_url('reporte/reporteLocalArea')?>">Puestos por Actividad</a></li>
 					  <?php
 				  }
 			  }
@@ -116,7 +116,7 @@
 			  if(array_key_exists('reporte/reporteFuncionalidad',$permisos)){
 				  if($permisos['reporte/reporteFuncionalidad']['acceso'] == 1){
 					  ?>
-					  <li><a href="<?php echo site_url('reporte/reporteFuncionalidad')?>">Reporte Tabla 4</a></li>
+					  <li><a href="<?php echo site_url('reporte/reporteFuncionalidad')?>">Funcionalidad por Puesto</a></li>
 					  <?php
 				  }
 			  }
@@ -124,7 +124,7 @@
 			  if(array_key_exists('reporte/reporteProduccionArea',$permisos)){
 				  if($permisos['reporte/reporteProduccionArea']['acceso'] == 1){
 					  ?>
-					  <li><a href="<?php echo site_url('reporte/reporteProduccionArea')?>">Reporte Tabla 5</a></li>
+					  <li><a href="<?php echo site_url('reporte/reporteProduccionArea')?>">Riesgo por Sede</a></li>
 					  <?php
 				  }
 			  }
@@ -132,14 +132,14 @@
               if(array_key_exists('reporte/reporteAptitud',$permisos)){
                   if($permisos['reporte/reporteAptitud']['acceso'] == 1){
               ?>
-                      <li><a href="<?php echo site_url('reporte/reporteAptitud')?>">Reporte Tabla 6</a></li>
+                      <li><a href="<?php echo site_url('reporte/reporteAptitud')?>">Aptitud de los Puestos</a></li>
               <?php }
               }
 
               if(array_key_exists('reporte/reporteContingencia',$permisos)){
                   if($permisos['reporte/reporteContingencia']['acceso'] == 1){
               ?>
-                      <li><a href="<?php echo site_url('reporte/reporteContingencia')?>">Reporte Tabla 7</a></li>
+                      <li><a href="<?php echo site_url('reporte/reporteContingencia')?>">Reducción de la Contingencia</a></li>
               <?php
                   }
               }

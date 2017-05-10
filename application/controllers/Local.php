@@ -196,12 +196,13 @@ class Local extends CI_Controller
             try {
                 $count = Area_model::where(['id_local' => $id,'estado'=> 1])->count();
                 if ($count == 0) {
-                    $local = Local_model::find($id);
-                    $local->estado = 0;
-                    $local->usuario_modificado = $this->session->userdata('usuario');
-                    $local->fecha_modificado = date('Y-m-d H:i:s');
 
-                    $local->save();
+                    Local_model::destroy($id);
+//                    $local->estado = 0;
+//                    $local->usuario_modificado = $this->session->userdata('usuario');
+//                    $local->fecha_modificado = date('Y-m-d H:i:s');
+//
+//                    $local->save();
 
                     $result['status'] = true;
                     $result['result'] = 'Se elimino el local satisfactoriamente.';

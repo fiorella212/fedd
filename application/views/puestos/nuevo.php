@@ -154,13 +154,13 @@
 					<div class="row">
 						<div class="col-lg-6 col-md-6 col-sm-6">
 							<div class="form-group">
-								<label for="cmbArea" class="control-label col-md-7">&Aacute;rea estandar</label>
+								<label for="cmbArea" class="control-label col-md-7">&Aacute;rea est&aacute;ndar</label>
 							</div>
 						</div>
 						<div class="col-lg-6 col-md-6 col-sm-6">
 							<div class="form-group">
 								<select name="cmbArea" id="cmbArea" class="form-control" required>
-									<option value="">Seleccione Area</option>
+									<option value="">Seleccione &Aacute;rea est&aacute;ndar</option>
 								</select>
 							</div>
 						</div>

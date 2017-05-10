@@ -142,6 +142,7 @@
 					{"data": "estado_registro"}
 				]
 				,
+				"order": [[ 0, "desc" ]],
 				"columnDefs": [
 					{
 						"targets": [0],

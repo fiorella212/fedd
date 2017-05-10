@@ -3,7 +3,7 @@
     <div class="col-lg-12 col-md-12 col-sm-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h5 class="text-center">Nro. 7 Reducción de contingencia de ley</h5>
+                <h5 class="text-center">Reporte nro. 7 Reducción de contingencia de la ley</h5>
             </div>
             <div class="panel-body">
                 <form method="post" action="<?php echo site_url('reporte/exportContingencia'); ?>">
@@ -28,7 +28,7 @@
                 <br/>
                 <div class="table-responsive" id="table">
                     <table class="table" style="width: 100%; solid:1px" id="tblPuestos">
-                        <thead style=" !important ;background: #3B5A66; color: white">
+                        <thead style=" !important ;background: #2C3A63; color: white">
                         <th  style="text-align:center; width: 33.33%;" ><span class="empresa"></span></th>
                         <th style="text-align:center; width: 33.33%;" >NRO. PUESTOS</th>
                         <th style="text-align:center; width: 33.33%;" >TOTAL TRABAJADORES</th>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="table-responsive" id="table">
                     <table class="table" style="width: 100%; solid:1px" id="tblPuestos2">
-                        <thead style=" !important ;background: #3B5A66; color: white">
+                        <thead style=" !important ;background: #2C3A63; color: white">
                         <th style="text-align:center;" colspan="3">EVALUACION SABHA</th>
                         </thead>
                         <tbody>
@@ -71,7 +71,7 @@
 
                 <div class="table-responsive" id="table">
                     <table class="table" style="width: 100%; solid:1px" id="tblPuestos3">
-                        <thead style=" !important ;background: #3B5A66; color: white">
+                        <thead style=" !important ;background: #2C3A63; color: white">
                         <th style="text-align:center;" colspan="3" >IMPLEMENTACIÓN DE GEORDI</th>
                         </thead>
                         <tbody>

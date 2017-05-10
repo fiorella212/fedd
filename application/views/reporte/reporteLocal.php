@@ -3,7 +3,8 @@
     <div class="col-lg-12 col-md-12 col-sm-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h5 class="text-center">Nro. 1 Distribución de puestos de trabajo por unidad de producción</h5>
+                <h5 class="text-center">Reporte nro. 1 Distribución de puestos por empresa (SAP – Puestos Evaluados)
+                    </h5>
             </div>
             <div class="panel-body">
                 <form method="post" action="<?php echo site_url('reporte/exportLocal'); ?>">
@@ -28,7 +29,7 @@
                 <br/>
                 <div class="table-responsive" id="table">
                     <table class="table" style="width: 100%; solid:1px" id="tblPuestos">
-                        <thead style=" !important ;background: #3B5A66; color: white">
+                        <thead style=" !important ;background: #2C3A63; color: white">
                         <th style="text-align:center;" >EMPRESA</th>
                         <th style="text-align:center;" >SEDE</th>
                         <th style="text-align:center;" colspan="2">PUESTOS SAP</th>
@@ -40,7 +41,7 @@
                 </div>
                 <div class="table-responsive" id="table">
                     <table class="table" style="width: 100%; solid:1px" id="tblPuestos2">
-                        <thead style=" !important ;background: #3B5A66; color: white">
+                        <thead style=" !important ;background: #2C3A63; color: white">
                         <th style="text-align:center;" >EMPRESA</th>
                         <th style="text-align:center;" >SEDE</th>
                         <th >ÁREAS EVALUADAS</th>

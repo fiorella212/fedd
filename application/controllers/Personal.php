@@ -62,7 +62,7 @@ class Personal extends CI_Controller
 
             $obj_excel = PHPExcel_IOFactory::load("uploads/{$newfilename}");
             $sheetData = $obj_excel->getActiveSheet()->toArray(null,true,true,true);
-
+			$personalImportado = 0;
             foreach ($sheetData as $index => $value) {
                 if ( $index != 1 ){
 //                    'id_empresa_sap','empresa_nombre_sap','id_sede_sap','sede_nombre_sap','area_nombre',
@@ -88,10 +88,11 @@ class Personal extends CI_Controller
                     $personal->sede_estudio = $value['P'] == ''? '' : $value['P'];
                     $personal->id_empresa = $this->session->id_empresa;
                     $personal->save();
+					$personalImportado++;
                 }
             }
             $result['status'] = true;
-            $result['result'] = 'Se importo los registros SAP correctamente';
+            $result['result'] = "Se importaron " . $personalImportado . " registros SAP";
 
         }catch(Exception $e){
             $result['result'] = $e->getMessage();
@@ -104,9 +105,9 @@ class Personal extends CI_Controller
     function deleteall() {
 		try {
 			$result = array('status' => false, 'result' => null);
-			$this->db->query('TRUNCATE personal');
+			$this->db->query('DELETE FROM personal WHERE id_empresa ='.$this->session->id_empresa);
 			$result['status'] = true;
-			$result['result'] = 'Se elimino correctamente los registros de Personal SAP';
+			$result['result'] = 'Se elimino correctamente TODOS los registros de Personal SAP';
 		} catch(Exception $e){
 			$result['result'] = $e->getMessage();
 		}

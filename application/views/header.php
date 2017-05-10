@@ -3,7 +3,9 @@
 <head>
 	<title>:: Puestos de Trabajo ::</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/components/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/components/select2/dist/css/select2.min.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/components/datatables/media/css/dataTables.bootstrap.min.css">

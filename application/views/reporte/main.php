@@ -27,13 +27,13 @@
                     <br/>
                 <div class="table-responsive" id="table">
                     <table class="table" style="width: 100%; solid:1px" id="tblPuestos">
-                        <thead style=" !important ;background: #3B5A66; color: white">
+                        <thead style=" !important ;background: #2C3A63; color: white">
                         <th style="text-align:center;" rowspan="2">SEDES</th>
                         <th style="text-align:center;" rowspan="2">AREAS</th>
                         <th style="text-align:center;" colspan="2">RESULTADO</th>
                         <th style="text-align:center;" rowspan="2">TOTAL </th>
                         </thead>
-                        <thead style="text-align:center !important; background: #3B5A66; color: white">
+                        <thead style="text-align:center !important; background: #2C3A63; color: white">
                         <th></th>
                         <th></th>
                         <th style="text-align:center;">APTO</th>

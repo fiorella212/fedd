@@ -27,10 +27,10 @@
 						</div>
 						<div class="col-lg-6 col-md-6 col-sm-6">
 							<div class="form-group">
-								<label for="cmbArea" class="col-sm-4 control-label">&Aacute;rea de Trabajo</label>
+								<label for="cmbArea" class="col-sm-4 control-label">&Aacute;rea est&aacute;ndar</label>
 								<div class="col-md-8">
 									<select name="cmbArea" id="cmbArea" class="form-control">
-										<option value="">Seleccione Area</option>
+										<option value="">Seleccione &Aacute;rea est&aacute;ndar</option>
 									</select>
 								</div>
 							</div>

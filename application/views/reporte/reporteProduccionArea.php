@@ -3,7 +3,8 @@
     <div class="col-lg-12 col-md-12 col-sm-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h5 class="text-center">Tabla N° 5 Unidades de producción y áreas visitadas</h5>
+                <h5 class="text-center">Reporte nro. 4 Magnitud del riesgo por sede
+                    </h5>
             </div>
             <div class="panel-body">
                 <form method="post" action="<?php echo site_url('reporte/exportProduccionArea'); ?>">
@@ -28,7 +29,7 @@
                 <br/>
                 <div class="table-responsive" id="table">
                     <table class="table" style="width: 100%; solid:1px" id="tblPuestos">
-						<thead style=" !important ;background: #3B5A66; color: white">
+						<thead style=" !important ;background: #2C3A63; color: white">
 						<tr>
 							<th style="text-align:center; vertical-align: middle;" rowspan="2">SEDES</th>
 							<th style="text-align:center; vertical-align: middle;" rowspan="2">&Aacute;REAS</th>

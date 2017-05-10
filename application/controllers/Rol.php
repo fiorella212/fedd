@@ -243,21 +243,26 @@ class Rol extends CI_Controller
                 $exportar = $value->exportar == 1 ? 'Si' : 'No';
                 $importar = $value->importar == 1 ? 'Si' : 'No';
                 if($value->permiso == 'EVALUACION EVA-ERIN' || $value->permiso == 'EVALUACION SISO' || $value->permiso == 'EVALUACION FEDD'
-                    || $value->permiso == 'IMPORTAR PERSONAL SAP' || $value->permiso == 'REPORTE INTERNO'){
+                    || $value->permiso == 'REPORTE INTERNO'){
                     $agregar = '';
                     $editar = '';
                     $eliminar = '';
                     $exportar ='';
                     $importar = '';
                 }
-
-                if($value->permiso == 'MANT. EMPRESA' || $value->permiso == 'MANT. LOCAL' || $value->permiso == 'MANT. AREA'
+				if($value->permiso == 'IMPORTAR PERSONAL SAP'){
+                    $agregar = '';
+                    $editar = '';
+                    $exportar ='';
+                    $importar = '';
+				}
+                if($value->permiso == 'MANT. EMPRESA' || $value->permiso == 'MANT. SEDE' || $value->permiso == 'MANT. AREA'
                     || $value->permiso == 'MANT. ROLES' || $value->permiso == 'MANT. USUARIO' || $value->permiso == 'CONFIGURACION SISO') {
                     $importar = '';
                 }
-				if($value->permiso == 'REPORTE PUESTOS' || $value->permiso == 'REPORTE TABLA 1' || $value->permiso == 'REPORTE TABLA 3'
-					|| $value->permiso == 'REPORTE TABLA 4' || $value->permiso == 'REPORTE TABLA 5' || $value->permiso == 'REPORTE TABLA 6'
-					|| $value->permiso == 'REPORTE TABLA 7'){
+				if($value->permiso == 'REPORTE PUESTOS' || $value->permiso == 'PUESTOS POR EMPRESA' || $value->permiso == 'PUESTOS POR ACTIVIDAD'
+					|| $value->permiso == 'FUNCIONALIDAD POR PUESTO' || $value->permiso == 'RIESGO POR SEDE' || $value->permiso == 'APTITUD DE LOS PUESTOS'
+					|| $value->permiso == 'REDUCCION DE CONTINGENCIA'){
                     $agregar = '';
                     $editar = '';
                     $eliminar = '';

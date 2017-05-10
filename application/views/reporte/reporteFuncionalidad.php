@@ -3,7 +3,8 @@
     <div class="col-lg-12 col-md-12 col-sm-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h5 class="text-center">Tabla N° 4 Resultados de la evaluaci&oacute;n de funcionalidades F&iacute;sicas y Mentales</h5>
+                <h5 class="text-center">Reporte nro. 5 Resultados de la evaluación de funcionalidades físicas y mentales por puesto
+                    </h5>
             </div>
             <div class="panel-body">
                 <form method="post" action="<?php echo site_url('reporte/exportReporteFuncionalidad'); ?>">
@@ -27,7 +28,7 @@
                 <br/>
                 <div class="table-responsive" id="table">
                     <table class="table" style="width: 100%; solid:1px" id="tblPuestos">
-						<thead style=" !important ;background: #3B5A66; color: white">
+						<thead style=" !important ;background: #2C3A63; color: white">
 						<tr>
 							<th style="text-align:center; vertical-align: middle;" rowspan="2" colspan="2">FUNCIONALIDAD</th>
 							<th style="text-align:center; vertical-align: middle;" rowspan="1">NORMAL</th>

@@ -241,17 +241,18 @@ class Siso extends CI_Controller
 		$cuestionario = $this->input->post('cuestionario');
 		$id_puesto = $this->input->post('id_puesto');
 		try {
-			$cuestionario_old = Cuestionario_siso_model::where(['id_puesto_trabajo' => $id_puesto])->get();
-			if ($cuestionario_old) {
-				foreach ($cuestionario_old as $row_cuestionario) {
-					$cuestionario_del = Cuestionario_siso_model::find($row_cuestionario->id);
-					$cuestionario_del->estado = 0;
-					$cuestionario_del->usuario_modificado = $this->session->userdata('usuario');
-					$cuestionario_del->fecha_modificado = date('Y-m-d H:i:s');
-
-					$cuestionario_del->save();
-				}
-			}
+            $this->db->query("DELETE FROM cuestionario_sido WHERE id_puesto_trabajo = $id_puesto");
+//			$cuestionario_old = Cuestionario_siso_model::where(['id_puesto_trabajo' => $id_puesto])->get();
+//			if ($cuestionario_old) {
+//				foreach ($cuestionario_old as $row_cuestionario) {
+//					$cuestionario_del = Cuestionario_siso_model::find($row_cuestionario->id);
+//					$cuestionario_del->estado = 0;
+//					$cuestionario_del->usuario_modificado = $this->session->userdata('usuario');
+//					$cuestionario_del->fecha_modificado = date('Y-m-d H:i:s');
+//
+//					$cuestionario_del->save();
+//				}
+//			}
 
 			if (count($cuestionario) > 0) {
 				$j = 0;
@@ -626,13 +627,13 @@ class Siso extends CI_Controller
 			try {
 				$count = cuestionario_siso_model::where(['id_pregunta_siso' => $id, 'estado' => 1])->count();
 				if ($count == 0) {
-					$empresa = Pregunta_siso_model::find($id);
+					Pregunta_siso_model::destroy($id);
 
-					$empresa->estado = 0;
-					$empresa->usuario_modificado = $this->session->userdata('usuario');
-					$empresa->fecha_modificado = date('Y-m-d H:i:s');
-
-					$empresa->save();
+//					$empresa->estado = 0;
+//					$empresa->usuario_modificado = $this->session->userdata('usuario');
+//					$empresa->fecha_modificado = date('Y-m-d H:i:s');
+//
+//					$empresa->save();
 					$result['status'] = true;
 					$result['result'] = 'Se elimino la Pregunta satisfactoriamente.';
 				} else {

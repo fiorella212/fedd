@@ -290,7 +290,7 @@ exit;
 
         $_sql ="SELECT e.razon_social, ( SELECT count( distinct personal.`codigo_puesto_creado`) total
 FROM personal
-WHERE personal.id_empresa =  $id_empresa ) puestos,
+WHERE personal.id_empresa =  $id_empresa AND sede_estudio != '' AND sede_estudio IS NOT NULL) puestos,
 				SUM(CASE WHEN pt.es_apto = 1 OR pt.es_apto = 0 THEN 1 ELSE 0 END ) puestos_evaluados,
 				SUM(CASE WHEN pt.es_apto = 1 THEN 1 ELSE 0 END ) puestos_apto,
                 SUM(CASE WHEN pt.es_apto = 0 THEN 1 ELSE 0 END) puestos_no_apto
@@ -319,7 +319,7 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
                     'reduccion_contingencia' => 0
                 );
 
-                $_sql2 ="SELECT e.razon_social, (  SELECT COUNT(1) FROM personal WHERE personal.id_empresa = $id_empresa ) trabajadores,
+                $_sql2 ="SELECT e.razon_social, (  SELECT COUNT(1) FROM personal WHERE personal.id_empresa = $id_empresa AND sede_estudio != '' AND sede_estudio IS NOT NULL) trabajadores,
 				SUM(CASE WHEN pt.es_apto = 1 OR pt.es_apto = 0 THEN 1 ELSE 0 END ) trabajadores_evaluados,
 				SUM(CASE WHEN pt.es_apto = 1 THEN 1 ELSE 0 END ) trabajadores_apto,
                 SUM(CASE WHEN pt.es_apto = 0 THEN 1 ELSE 0 END) trabajadores_no_apto
@@ -357,14 +357,14 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
 
         $_sql ="SELECT e.razon_social,l.id,l.nombre nombre_local,count(distinct pt.codigo_puesto_creado) puestos_sap
 					FROM personal pt
-					LEFT JOIN local l ON l.nombre = pt.sede_estudio
+					LEFT JOIN local l ON l.nombre = pt.sede_estudio AND l.id_empresa = $id_empresa
 					LEFT JOIN empresa e ON e.id = pt.id_empresa
-					WHERE pt.id_empresa =  $id_empresa";
+					WHERE pt.id_empresa =  $id_empresa AND l.id IS NOT NULL";
 
         $_sql .= $id_local != '' ? " AND l.id = $id_local" :'';
         $_sql .= " GROUP BY l.nombre ORDER BY 3;";
         $result = $this->db->query($_sql);
-        $nombre_empresa = '';
+	$nombre_empresa = '';
         $i = 0;
 
         $total_puestos = 0;
@@ -399,7 +399,7 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
 
                 $_sql2 ="SELECT e.razon_social,l.id,l.nombre nombre_local,count(distinct pt.id) trabajadores
                 FROM personal pt
-                LEFT JOIN local l ON l.nombre = pt.sede_estudio
+                LEFT JOIN local l ON l.nombre = pt.sede_estudio AND l.id_empresa = $id_empresa
                 LEFT JOIN empresa e ON e.id = pt.id_empresa
                 WHERE pt.id_empresa = $id_empresa and l.id = $value->id;";
 
@@ -424,10 +424,10 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
 
         foreach($reporte as $k => $v){
             if($v['puestos_sap']>= 1){
-                $reporte[$k]['porcentaje_puestos'] = round(($v['puestos_sap']*100)/$maximo_puestos);
+                $reporte[$k]['porcentaje_puestos'] = round(($v['puestos_sap']*100)/$total_puestos);
             }
             if($v['trabajadores']>= 1){
-                $reporte[$k]['porcentaje_trabajadores'] = round(($v['trabajadores']*100)/$maximo_trabajadores);
+                $reporte[$k]['porcentaje_trabajadores'] = round(($v['trabajadores']*100)/$total_trabajadores);
             }
 
         }
@@ -734,7 +734,7 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
                     $nombre_local = $value->nombre_local;
                     $i++;
                 }
-                $array_total = array('TOTALES','',$total_apto,$total_no_apto,$total_total);
+                $array_total = array('TOTALES DE PUESTOS DE TRABAJO','',$total_apto,$total_no_apto,$total_total);
                 array_push($reporte, $array_total);
             }else{
                 $total_local_apto = 0;
@@ -989,7 +989,7 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
         // Nombre de Hola Excel
         $objPHPExcel->getActiveSheet()->setTitle('Tabla Nro. 6');
         // Titulos de la grilla
-        $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Tabla N° 6 Determinacion de la aptitud de puestos disponibles para incorporar personas con discapacidad');
+        $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Reporte nro. 6 Aptitud de puestos disponibles para personas con discapacidad');
 
         $objPHPExcel->getActiveSheet()->setCellValue('A3', 'SEDE');
         $objPHPExcel->getActiveSheet()->setCellValue('B3', 'NRO. AREAS');
@@ -1104,7 +1104,7 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
 
         $_sql ="SELECT e.razon_social, ( SELECT count( distinct personal.`codigo_puesto_creado`) total
 FROM personal
-WHERE personal.id_empresa =  $id_empresa ) puestos,
+WHERE personal.id_empresa =  $id_empresa AND sede_estudio != '' AND sede_estudio IS NOT NULL) puestos,
 				SUM(CASE WHEN pt.es_apto = 1 OR pt.es_apto = 0 THEN 1 ELSE 0 END ) puestos_evaluados,
 				SUM(CASE WHEN pt.es_apto = 1 THEN 1 ELSE 0 END ) puestos_apto,
                 SUM(CASE WHEN pt.es_apto = 0 THEN 1 ELSE 0 END) puestos_no_apto
@@ -1134,7 +1134,7 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
                 'reduccion_contingencia' => 0
             );
 
-            $_sql2 ="SELECT e.razon_social, (  SELECT COUNT(1) FROM personal WHERE personal.id_empresa = $id_empresa ) trabajadores,
+            $_sql2 ="SELECT e.razon_social, (  SELECT COUNT(1) FROM personal WHERE personal.id_empresa = $id_empresa AND sede_estudio != '' AND sede_estudio IS NOT NULL) trabajadores,
 				SUM(CASE WHEN pt.es_apto = 1 OR pt.es_apto = 0 THEN 1 ELSE 0 END ) trabajadores_evaluados,
 				SUM(CASE WHEN pt.es_apto = 1 THEN 1 ELSE 0 END ) trabajadores_apto,
                 SUM(CASE WHEN pt.es_apto = 0 THEN 1 ELSE 0 END) trabajadores_no_apto
@@ -1168,7 +1168,7 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
         // Nombre de Hola Excel
         $objPHPExcel->getActiveSheet()->setTitle('Tabla Nro. 7');
         // Titulos de la grilla
-        $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Nro. 7 Reducción de contingencia de ley');
+        $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Reporte nro. 7 Reducción de contingencia de la ley');
         $objPHPExcel->getActiveSheet()->setCellValue('A2', $reporte['razon_social']);
         $objPHPExcel->getActiveSheet()->setCellValue('B2', 'NRO. PUESTOS');
         $objPHPExcel->getActiveSheet()->setCellValue('C2', 'TOTAL DE TRABAJADORES');
@@ -1187,7 +1187,7 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
                 'fill' => array(
                     'type'       => PHPExcel_Style_Fill::FILL_GRADIENT_LINEAR,
                     'startcolor' => array(
-                        'argb' => '3B5A66'
+                        'argb' => '2C3A63'
                     )
                 )
             )
@@ -1195,7 +1195,7 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
         $objPHPExcel->getActiveSheet()->getStyle('A2:C2')->getFill()->applyFromArray(array(
             'type' => PHPExcel_Style_Fill::FILL_SOLID,
             'startcolor' => array(
-                'rgb' => '3B5A66'
+                'rgb' => '2C3A63'
             )
         ));
 
@@ -1227,7 +1227,7 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
                 'fill' => array(
                     'type'       => PHPExcel_Style_Fill::FILL_GRADIENT_LINEAR,
                     'startcolor' => array(
-                        'argb' => '3B5A66'
+                        'argb' => '2C3A63'
                     )
                 )
             )
@@ -1268,7 +1268,7 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
                 'fill' => array(
                     'type'       => PHPExcel_Style_Fill::FILL_GRADIENT_LINEAR,
                     'startcolor' => array(
-                        'argb' => '3B5A66'
+                        'argb' => '2C3A63'
                     )
                 )
             )
@@ -1323,7 +1323,7 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
         $objPHPExcel->getActiveSheet()->getStyle('A15:C15')->getFill()->applyFromArray(array(
             'type' => PHPExcel_Style_Fill::FILL_SOLID,
             'startcolor' => array(
-                'rgb' => '848484'
+                'rgb' => '2C3A63'
             )
         ));
 
@@ -1341,7 +1341,7 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
                 'fill' => array(
                     'type'       => PHPExcel_Style_Fill::FILL_GRADIENT_LINEAR,
                     'startcolor' => array(
-                        'argb' => '848484'
+                        'argb' => '2C3A63'
                     )
                 )
             )
@@ -1482,9 +1482,9 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
             ->setDescription("Distribucion de puestos de trabajo por  unidad de producción y area");
 
         // Nombre de Hola Excel
-        $objPHPExcel->getActiveSheet()->setTitle('Tabla Nro. 3');
+        $objPHPExcel->getActiveSheet()->setTitle('Tabla Nro. 2');
         // Titulos de la grilla
-        $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Nro. 3 Distribución de puestos de trabajo por unidad de producción y área');
+        $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Reporte nro. 2 Distribución de puestos por actividad');
 
         $objPHPExcel->getActiveSheet()->setCellValue('A2', 'SEDE');
         $objPHPExcel->getActiveSheet()->setCellValue('B2', 'NRO. AREAS EVALUADAS');
@@ -1546,7 +1546,7 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
                 'fill' => array(
                     'type'       => PHPExcel_Style_Fill::FILL_GRADIENT_LINEAR,
                     'startcolor' => array(
-                        'argb' => '3B5A66'
+                        'argb' => '2C3A63'
                     )
                 )
             )
@@ -1566,7 +1566,7 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
                 'fill' => array(
                     'type'       => PHPExcel_Style_Fill::FILL_GRADIENT_LINEAR,
                     'startcolor' => array(
-                        'argb' => '3B5A66'
+                        'argb' => '2C3A63'
                     )
                 )
             )
@@ -1586,7 +1586,7 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
                 'fill' => array(
                     'type'       => PHPExcel_Style_Fill::FILL_GRADIENT_LINEAR,
                     'startcolor' => array(
-                        'argb' => '3B5A66'
+                        'argb' => '2C3A63'
                     )
                 )
             )
@@ -1626,7 +1626,7 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
 
         // Redirect output to a client’s web browser (Excel5)
         header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="REPORTE_NRO3'. date('ymd') .'.xls"');
+        header('Content-Disposition: attachment;filename="REPORTE_NRO2'. date('ymd') .'.xls"');
         header('Cache-Control: max-age=0');
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
@@ -2159,9 +2159,9 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
 			->setDescription("Tabla N° 5 Unidades de producción y áreas visitadas");
 
 		// Nombre de Hola Excel
-		$objPHPExcel->getActiveSheet()->setTitle('Tabla Nro. 5');
+		$objPHPExcel->getActiveSheet()->setTitle('Tabla Nro. 4');
 		// Titulos de la grilla
-		$objPHPExcel->getActiveSheet()->setCellValue('A1', 'Tabla N° 5 Unidades de producción y áreas visitadas');
+		$objPHPExcel->getActiveSheet()->setCellValue('A1', 'Reporte nro. 4 Magnitud del riesgo por sede');
 
 		$objPHPExcel->getActiveSheet()->setCellValue('A2', 'SEDES');
 		$objPHPExcel->getActiveSheet()->setCellValue('B2', 'Nro AREAS');
@@ -2201,7 +2201,7 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
 				'fill' => array(
 					'type'       => PHPExcel_Style_Fill::FILL_GRADIENT_LINEAR,
 					'startcolor' => array(
-						'argb' => '3B5A66'
+						'argb' => '2C3A63'
 					)
 				)
 			)
@@ -2221,7 +2221,7 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
 				'fill' => array(
 					'type'       => PHPExcel_Style_Fill::FILL_GRADIENT_LINEAR,
 					'startcolor' => array(
-						'argb' => '3B5A66'
+						'argb' => '2C3A63'
 					)
 				)
 			)
@@ -2263,7 +2263,7 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
 
 		// Redirect output to a client’s web browser (Excel5)
 		header('Content-Type: application/vnd.ms-excel');
-		header('Content-Disposition: attachment;filename="REPORTE_TABLA_NRO5'. date('ymd') .'.xls"');
+		header('Content-Disposition: attachment;filename="REPORTE_TABLA_NRO4'. date('ymd') .'.xls"');
 		header('Cache-Control: max-age=0');
 		// If you're serving to IE 9, then the following may be needed
 		header('Cache-Control: max-age=1');
@@ -2287,9 +2287,9 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
 
         $_sql ="SELECT e.razon_social,l.id,l.nombre nombre_local,count(distinct pt.codigo_puesto_creado) puestos_sap
 					FROM personal pt
-					LEFT JOIN local l ON l.nombre = pt.sede_estudio
+					LEFT JOIN local l ON l.nombre = pt.sede_estudio AND l.id_empresa = $id_empresa
 					LEFT JOIN empresa e ON e.id = pt.id_empresa
-					WHERE pt.id_empresa =  $id_empresa";
+					WHERE pt.id_empresa =  $id_empresa AND l.id IS NOT NULL";
 
         $_sql .= $id_local != '' ? " AND l.id = $id_local" :'';
         $_sql .= " GROUP BY l.nombre ORDER BY 3;";
@@ -2329,7 +2329,7 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
 
             $_sql2 ="SELECT e.razon_social,l.id,l.nombre nombre_local,count(distinct pt.id) trabajadores
                 FROM personal pt
-                LEFT JOIN local l ON l.nombre = pt.sede_estudio
+                LEFT JOIN local l ON l.nombre = pt.sede_estudio AND l.id_empresa = $id_empresa
                 LEFT JOIN empresa e ON e.id = pt.id_empresa
                 WHERE pt.id_empresa = $id_empresa and l.id = $value->id;";
 
@@ -2354,10 +2354,10 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
 
         foreach($reporte as $k => $v){
             if($v['puestos_sap']>= 1){
-                $reporte[$k]['porcentaje_puestos'] = round(($v['puestos_sap']*100)/$maximo_puestos);
+                $reporte[$k]['porcentaje_puestos'] = round(($v['puestos_sap']*100)/$total_puestos);
             }
             if($v['trabajadores']>= 1){
-                $reporte[$k]['porcentaje_trabajadores'] = round(($v['trabajadores']*100)/$maximo_trabajadores);
+                $reporte[$k]['porcentaje_trabajadores'] = round(($v['trabajadores']*100)/$total_trabajadores);
             }
 
         }
@@ -2476,7 +2476,7 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
         // Nombre de Hola Excel
         $objPHPExcel->getActiveSheet()->setTitle('Tabla Nro. 1.1');
         // Titulos de la grilla
-        $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Nro. 1 Distribución de puestos de trabajo por unidad de producción');
+        $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Reporte nro. 1 Distribución de puestos por empresa (SAP – Puestos Evaluados)');
 
         $objPHPExcel->getActiveSheet()->setCellValue('A2', 'EMPRESA');
         $objPHPExcel->getActiveSheet()->setCellValue('B2', 'SEDE');
@@ -2529,7 +2529,7 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
         $objPHPExcel->setActiveSheetIndex(1); // marcar como activa la nueva hoja
         $objPHPExcel->getActiveSheet()->setTitle('Tabla Nro. 1.2');
 
-        $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Nro. 1 Distribución de puestos de trabajo por unidad de producción');
+        $objPHPExcel->getActiveSheet()->setCellValue('A1', 'Reporte nro. 1.2 Distribución de puestos Evaluados por empresa');
 
         $objPHPExcel->getActiveSheet()->setCellValue('A2', 'EMPRESA');
         $objPHPExcel->getActiveSheet()->setCellValue('B2', 'SEDE');
@@ -3166,9 +3166,9 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
 			->setDescription("Tabla N° 4 Resultados de la evaluación de funcionalidades físicas y mentales");
 
 		// Nombre de Hola Excel
-		$objPHPExcel->getActiveSheet()->setTitle('Tabla Nro. 4');
+		$objPHPExcel->getActiveSheet()->setTitle('Tabla Nro. 5');
 		// Titulos de la grilla
-		$objPHPExcel->getActiveSheet()->setCellValue('A1', 'Tabla N° 4 Resultados de la evaluación de funcionalidades Físicas y Mentales');
+		$objPHPExcel->getActiveSheet()->setCellValue('A1', ' Reporte nro. 5 Resultados de la evaluación de funcionalidades físicas y mentales por puesto');
 
 		$objPHPExcel->getActiveSheet()->setCellValue('A2', 'FUNCIONALIDAD');
 		$objPHPExcel->getActiveSheet()->setCellValue('B2', '');
@@ -3207,7 +3207,7 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
 				'fill' => array(
 					'type'       => PHPExcel_Style_Fill::FILL_GRADIENT_LINEAR,
 					'startcolor' => array(
-						'argb' => '3B5A66'
+						'argb' => '2C3A63'
 					)
 				)
 			)
@@ -3227,7 +3227,7 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
 				'fill' => array(
 					'type'       => PHPExcel_Style_Fill::FILL_GRADIENT_LINEAR,
 					'startcolor' => array(
-						'argb' => '3B5A66'
+						'argb' => '2C3A63'
 					)
 				)
 			)
@@ -3259,7 +3259,7 @@ WHERE personal.id_empresa =  $id_empresa ) puestos,
 
 		// Redirect output to a client’s web browser (Excel5)
 		header('Content-Type: application/vnd.ms-excel');
-		header('Content-Disposition: attachment;filename="REPORTE_TABLA_NRO4'. date('ymd') .'.xls"');
+		header('Content-Disposition: attachment;filename="REPORTE_TABLA_NRO5'. date('ymd') .'.xls"');
 		header('Cache-Control: max-age=0');
 		// If you're serving to IE 9, then the following may be needed
 		header('Cache-Control: max-age=1');

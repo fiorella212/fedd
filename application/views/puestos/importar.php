@@ -18,7 +18,7 @@
 									<div class="form-group">
 										<label class="col-lg-3 control-label">Buscar el archivo:</label>
 										<div class="col-lg-9">
-											<input type="file" class="form-group"  style="width:100%;" name="archivo" id="archivo" accept=".csv"  />
+											<input type="file" class="form-group"  style="width:100%;" name="archivo" id="archivo" accept=".xls"  />
 											<input type="hidden" name="nombre_archivo"  id="nombre_archivo" />
 										</div>
 									</div>
@@ -32,9 +32,13 @@
 						</div>
 					</div>
 				</div>
+				<?php $permisos = $_SESSION['permisos']; ?>
 				<div class="modal-footer">
 					<button id="boton_subir2"  type="button" class="btn btn-save btn-s-md btn-primary">Importar</button>
-					<button id="boton_eliminar_registros"  type="button" class="btn btn-save btn-s-md btn-danger">Eliminar registros</button>
+                    <?php if($permisos['puestos']['eliminar'] == 1){
+                    ?>
+					<button id="boton_eliminar_registros"  type="button" class="btn btn-save btn-s-md btn-danger">Eliminar Puestos de Trabajo</button>
+                    <?php } ?>
 				</div>
 			</div>
 		</div>
@@ -52,7 +56,7 @@
 				return false;
 			}
 			extension = (file.substring(file.lastIndexOf("."))).toLowerCase();
-			if (extension!==".csv") {
+			if (extension!==".xls") {
 				alert("Archivo no Permitido");
 				return false;
 			}
@@ -86,7 +90,7 @@
 
 		$("#boton_eliminar_registros").on('click', function (event) {
 			event.preventDefault();
-			var msg = confirm("¿Esta seguro de Eliminar los registros de Puestos de Trabajo?");
+			var msg = confirm("¿Esta seguro de Eliminar TODOS los registros de Puestos de Trabajo?");
 			if (msg) {
 				$.ajax({
 					method: "POST",

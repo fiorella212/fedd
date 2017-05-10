@@ -4,7 +4,7 @@
 		padding-bottom: 40px;
 		background-color: #ff0017;
 		color: #333;
-		background-image: url("/puestos/public/images/fondo.png");
+		background-image: url("<?php echo base_url("/public/images/fondo.png"); ?>");
 		background-position: center center;
 		background-repeat: no-repeat;
 		background-attachment: fixed;
@@ -31,21 +31,21 @@
 	}
 	.logogiordi {
 		color: #ffffff;
-		position: absolute;
-		top: 5%;
-		left: 5%;
 	}
 
 </style>
 <div class="container-fluid" >
 
-	<div class="logogiordi">
-		<div class="titulologo"><stron>GEORDI</stron></div>
-		<div><span style="font-size: 15px">Gesti&oacute;n Organizacional Discapacitados</span></div>
+	<div class="row">
+	<div class="col-sm-12">
+	<div class="logogiordi col-sm-6">
+		<div class="titulologo col-sm-12"><strong>GEORDI</strong></div>
+		<div class="col-sm-12"><span style="font-size: 15px">Gesti&oacute;n Organizacional Discapacitados</span></div>
 	</div>
 	
-	<div class="col-sm-3 col-sm-offset-9">
-		<img src="<?php echo base_url("public/images/logo_cliente.png"); ?>">
+	<div class="col-sm-6">
+		<img class="pull-right" src="<?php echo base_url("public/images/logo_cliente.png"); ?>">
+	</div>
 	</div>
 	<div class="clearfix"></div>
 	<div class="clearfix"></div>
@@ -112,6 +112,9 @@
 	<div class="clearfix"></div>
 	<div class="clearfix"></div>
 	<div class="clearfix"></div>
+	<br>
+	<br>
+	<br>
 	<br>
 	<br>
 	<br>

@@ -3,7 +3,7 @@
 	<div class="col-lg-12 col-md-12 col-sm-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h5 class="text-center">&Aacute;reas de trabajo</h5>
+				<h5 class="text-center">&Aacute;reas est&aacute;ndar de trabajo</h5>
 			</div>
 			<div class="panel-body">
 
@@ -17,7 +17,7 @@
                     <th>id_local</th>
 					<th>Sede</th>
                     <th>id_area</th>
-					<th>&Aacute;rea</th>
+					<th>&Aacute;rea est&aacute;ndar</th>
 					<th>Acciones</th>
 					</thead>
 					<tbody>
@@ -35,7 +35,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Nueva &Aacute;rea</h4>
+				<h4 class="modal-title">Nueva &Aacute;rea est&aacute;ndar</h4>
 			</div>
 			<div class="modal-body">
 
@@ -65,7 +65,7 @@
 					<div class="form-group">
 						<label for="txtNombreArea" class="col-sm-2 control-label">Nombre</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control nombre" required name="nombre" id="nombre" id="txtNombreArea" placeholder="Nombre Area">
+							<input type="text" class="form-control nombre" required name="nombre" id="nombre" id="txtNombreArea" placeholder="Nombre &Aacute;rea est&aacute;ndar">
 						</div>
 					</div>
 				</form>
@@ -73,7 +73,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-				<button type="button" class="btn btn-primary btn-save">Registrar &Aacute;rea</button>
+				<button type="button" class="btn btn-primary btn-save">Registrar &Aacute;rea est&aacute;ndar</button>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
@@ -84,7 +84,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Actualizar &Aacute;rea</h4>
+				<h4 class="modal-title">Actualizar &Aacute;rea est&aacute;ndar</h4>
 			</div>
 			<div class="modal-body">
 
@@ -114,7 +114,7 @@
 					<div class="form-group">
 						<label for="txtNombreArea" class="col-sm-2 control-label">Nombre</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control nombre" required name="nombre" id="nombre" id="txtNombreArea" placeholder="Nombre Area">
+							<input type="text" class="form-control nombre" required name="nombre" id="nombre" id="txtNombreArea" placeholder="Nombre &Aacute;rea est&aacute;ndar">
 						</div>
 					</div>
 				</form>
@@ -122,7 +122,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-				<button type="button" class="btn btn-primary btn-edit">Actualizar &Aacute;rea</button>
+				<button type="button" class="btn btn-primary btn-edit">Actualizar &Aacute;rea est&aacute;ndar</button>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
@@ -133,14 +133,14 @@
         <div class="modal-content">
             <div class="modal-header bg-danger">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h5 class="modal-title font-bold">Eliminar Area</h5>
+                <h5 class="modal-title font-bold">Eliminar &Aacute;rea est&aacute;ndar</h5>
             </div>
             <div class="modal-body">
-                <p>¿Desea eliminar el area?</p>
+                <p>¿Desea eliminar el &Aacute;rea Est&aacute;ndar?</p>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button class="btn btn-danger btn-delete">Eliminar</button>
+                <button class="btn btn-danger btn-delete">Eliminar &Aacute;rea est&aacute;ndar</button>
             </div>
         </div>
     </div>

@@ -3,7 +3,8 @@
     <div class="col-lg-12 col-md-12 col-sm-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h5 class="text-center">Nro. 3 Distribución de puestos de trabajo por unidad de producción y área</h5>
+                <h5 class="text-center">Reporte nro. 2 Distribución de puestos por actividad
+                    </h5>
             </div>
             <div class="panel-body">
                 <form method="post" action="<?php echo site_url('reporte/exportLocalArea'); ?>">
@@ -28,13 +29,13 @@
                 <br/>
                 <div class="table-responsive" id="table">
                     <table class="table" style="width: 100%; solid:1px" id="tblPuestos">
-                        <thead style=" !important ;background: #3B5A66; color: white">
+                        <thead style=" !important ;background: #2C3A63; color: white">
                         <th style="text-align:center;" rowspan="3">SEDES</th>
                         <th style="text-align:center;" rowspan="3">NRO. AREAS EVALUADAS</th>
                         <th style="text-align:center;" colspan="6">TIPO PUESTO</th>
                         <th style="text-align:center;" colspan="3" rowspan="2">TOTAL</th>
                         </thead>
-                        <thead style="text-align:center !important; background: #3B5A66; color: white">
+                        <thead style="text-align:center !important; background: #2C3A63; color: white">
                         <th></th>
                         <th></th>
                         <th style="text-align:center;" colspan="3">CORE</th>
@@ -43,7 +44,7 @@
                         <th style="text-align:center;"></th>
                         <th style="text-align:center;"></th>
                         </thead>
-                        <thead style="text-align:center !important; background: #3B5A66; color: white">
+                        <thead style="text-align:center !important; background: #2C3A63; color: white">
                         <th></th>
                         <th></th>
                         <th style="text-align:center;" >PUESTOS</th>

@@ -180,13 +180,14 @@ class Empresa extends CI_Controller
             try {
                 $count = Local_model::where(['id_empresa'=> $id,'estado'=> 1])->count();
                if($count == 0){
-                   $empresa = Empresa_model::find($id);
-
-                   $empresa->estado = 0;
-                   $empresa->usuario_modificado = $this->session->userdata('usuario');
-                   $empresa->fecha_modificado = date('Y-m-d H:i:s');
-
-                   $empresa->save();
+                   Empresa_model::destroy($id);
+//                   $empresa = Empresa_model::find($id);
+//
+//                   $empresa->estado = 0;
+//                   $empresa->usuario_modificado = $this->session->userdata('usuario');
+//                   $empresa->fecha_modificado = date('Y-m-d H:i:s');
+//
+//                   $empresa->save();
                    $result['status'] = true;
                    $result['result'] = 'Se elimino la empresa satisfactoriamente.';
                }else{

@@ -42,7 +42,7 @@ class Puestos extends CI_Controller
 	public function getAll()
 	{
 		$puestoArray = array();
-		$puestos = Puesto_trabajo_model::whereRaw('id_empresa = ? AND estado = 1 ', array($this->session->id_empresa))->orderBy("fecha_creado", 'desc')->get();
+		$puestos = Puesto_trabajo_model::whereRaw('id_empresa = ? AND estado = 1 ', array($this->session->id_empresa))->orderBy("id", 'desc')->get();
 
 		foreach ($puestos as $puesto) {
 			$array = array(
@@ -237,7 +237,8 @@ class Puestos extends CI_Controller
 				$time = date('YmdHis');
 				$nombre = "$original" . "_" . "$time.$extension";
 				if (move_uploaded_file($archivo['tmp_name'], "uploads/$nombre")) {
-					$this->procesarFicheroImportado("uploads/$nombre");
+					$this->procesarExcelImportado("uploads/$nombre");
+//					$this->procesarFicheroImportado("uploads/$nombre");
 				} else {
 					$result['result'] = 'El archivo no pudo subir';
 					echo json_encode($result);
@@ -288,6 +289,304 @@ class Puestos extends CI_Controller
 	private function trim_values(&$value)
 	{
 		$value = trim($value);
+	}
+
+
+
+	public function procesarExcelImportado($fichero)
+	{
+		$result = array('status' => false, 'result' => null, 'log' => null);
+		$logArray = array();
+		$logName = $this->session->userdata('usuario') . date('Ymdhms');
+
+		try {
+//			$result = array('status' => false, 'result' => null);
+			$this->load->library('excel');
+			ini_set('max_execution_time', -1);
+			ini_set('memory_limit', '-1');
+			$this->load->database();
+
+			$obj_excel = PHPExcel_IOFactory::load($fichero);
+			$sheetData = $obj_excel->getActiveSheet()->toArray(null,true,true,true);
+
+			$contador = 0;
+			$indice = 0;
+			$puestosImportados = 0;
+
+			foreach ($sheetData as $index => $line) {
+
+
+				/// Nuevo template importacion
+
+				$_id_empresa_legacy = $line['A'];
+				$_descripcion_empresa = $line['B'];
+				$_rubro_empresa = $line['C'];
+				$_ubicacion_local = $line['D'];
+				$_id_local_legacy = $line['E'];
+				$_descripcion_local = $line['F'];
+				$_codigo_sabha = $line['G'];
+				$_denominacion_sabha = trim($line['H']);
+				$_codigo_mof = $line['I'];
+				$_denominacion_mof = $line['J'];
+				$_codigo_sap = $line['K'];
+				$_denominacion_sap = trim($line['L']);
+				$_otra_denominacion = trim($line['M']);
+				$_area_puesto_trabajo = trim($line['N']);
+				$_nombre_puesto_trabajo = trim($line['O']);
+				$_encargado_puesto_trabajo = trim($line['P']);
+
+				$_resultado_fedd = $line['S']; // cambia de discapacidad segun linea
+				$_resultado_siso = $line['T']; // idem
+				$_resultado_evaerin = strtoupper($line['U']);
+				$_resultado_puesto = $line['V'];
+
+				$_ajustes_razonables = $line['X'];
+				$_tipo_puesto_trabajo = $line['Y']; // CORE | SOPORTE
+				$_resultado_apto = ($line['Z'] == "APTO") ? 1 : 0;
+
+				$_area_estandar = $line['AH'];
+				$_observaciones = $line['AK'];
+				$_codigo_unificado = $line['AL'];
+
+				$_funcion_principal = $line['AM'];
+				$s_actividad = $line['AN'];
+				$s_requerimiento = $line['AO'];
+				$s_restriccion = $line['AP'];
+
+
+
+				$LocalEncontrado = Local_model::whereRaw('id_empresa = ? AND estado = 1  AND nombre = ?',
+					array($this->session->id_empresa, strtolower($_descripcion_local)))->first();
+
+
+				if ($LocalEncontrado) {
+					$sql = "SELECT * FROM area where id_local = " . $LocalEncontrado->id . " AND estado = 1 AND nombre='" . $_area_estandar . "'";
+					$AreaEncontrada = $this->db->query($sql)->result_array();
+
+					if ($AreaEncontrada) {
+
+						if (($contador % 6) == 0) {
+							$indice = 0;
+
+							try {
+								$puestoImportado = new Puesto_trabajo_model();
+								$puestoImportado->id_empresa = (int)$this->session->userdata('id_empresa');
+								$puestoImportado->id_local = (int)$LocalEncontrado->id;
+								$puestoImportado->id_area = (int)$AreaEncontrada[0]['id'];
+//									Datos comunes
+								$puestoImportado->entrevistado_nombre = $_encargado_puesto_trabajo;
+								$puestoImportado->entrevistado_puesto = $_nombre_puesto_trabajo;
+
+								$puestoImportado->codigo_sabha = $_codigo_sabha;
+								$puestoImportado->denominacion_sabha = $_denominacion_sabha;
+								$puestoImportado->codigo_mof = $_codigo_mof;
+								$puestoImportado->denominacion_mof = $_denominacion_mof;
+								$puestoImportado->codigo_sap = $_codigo_sap;
+								$puestoImportado->denominacion_sap = $_denominacion_sap;
+								$puestoImportado->otra_denominacion = $_otra_denominacion;
+								$puestoImportado->tipo_puesto = $_tipo_puesto_trabajo;
+
+
+								$puestoImportado->s_visual_actividad = $s_actividad;
+								$puestoImportado->s_visual_requerimiento = $s_requerimiento;
+								$puestoImportado->s_visual_restriccion = $s_restriccion;
+//
+								$puestoImportado->funcion_principal = $_funcion_principal;
+
+								$puestoImportado->eva_erin_resultado = $_resultado_evaerin;
+								$puestoImportado->s_visual_pre_eval = $_resultado_fedd;
+								$puestoImportado->siso_s_visual = $_resultado_siso;
+								$puestoImportado->resultado_pt_s_visual = $_resultado_puesto;
+
+								$puestoImportado->resultado_final_s_visual = $_resultado_puesto;
+
+								$puestoImportado->area_puesto = $_area_puesto_trabajo;
+								$puestoImportado->codigo_unificado = $_codigo_unificado;
+
+								$puestoImportado->notas = $_observaciones;
+								$puestoImportado->es_apto = $_resultado_apto;
+								$puestoImportado->estado_registro = "CONCLUIDO";
+
+//									Auditoria
+								$puestoImportado->usuario_creado = $this->session->userdata('usuario');
+								$puestoImportado->fecha_creado = date('Y-m-d H:i:s');
+								$puestoImportado->usuario_modificado = $this->session->userdata('usuario');
+								$puestoImportado->fecha_modificado = date('Y-m-d H:i:s');
+								$puestoImportado->estado = 1;
+
+
+								// SAP
+								$puestoImportado->id_empresa_sap = (string) $_id_empresa_legacy;
+								$puestoImportado->id_local_sap = (string) $_id_local_legacy;
+								$puestoImportado->nombre_local = $_descripcion_local;
+
+
+								// MODIFICACIONES A TABLAS EXTRA
+								$LocalEncontrado->ubicacion = $_ubicacion_local;
+								$LocalEncontrado->save();
+
+								$EmpresaPuesto = Empresa_model::find($this->session->userdata('id_empresa'));
+								$EmpresaPuesto->rubro = $_rubro_empresa;
+								$EmpresaPuesto->save();
+
+
+
+								$puestoImportado->save();
+								$puestosImportados++;
+
+//									$indice++;
+//									$contador++;
+//									continue;
+
+							} catch (Illuminate\Database\QueryException $e) {
+								$error_code = $e->errorInfo[1];
+								if ($error_code == 1062) { // < codigo de error MySQL para unique
+									$this->escribirLogImport($logName . "LogError.txt", "ERROR", "El Codigo SABHA se esta repitiendo.", $csvLine);
+									$result['log'] = base_url("uploads/Import_" . $logName . "LogError");
+									$indice++;
+									$contador++;
+									continue;
+								}
+							}
+
+						} else {
+							if ($_codigo_sabha != '') {
+
+								try {
+									$puestoImportado = Puesto_trabajo_model::whereRaw('codigo_sabha = ? and id_local = ?', array($_codigo_sabha, $LocalEncontrado->id))->first();
+									if ($puestoImportado) {
+										if ($indice == 1) {
+											$puestoImportado->s_auditivo_actividad = $s_actividad;
+											$puestoImportado->s_auditivo_requerimiento = $s_requerimiento;
+											$puestoImportado->s_auditivo_restriccion = $s_restriccion;
+											$puestoImportado->s_auditivo_pre_eval = $_resultado_fedd;
+											$puestoImportado->siso_s_auditivo = $_resultado_siso;
+											$puestoImportado->resultado_pt_s_auditivo = $_resultado_puesto;
+											$puestoImportado->resultado_final_s_auditivo = $_resultado_puesto;
+
+										} else if ($indice == 2) {
+											$puestoImportado->m_ext_inf_actividad = $s_actividad;
+											$puestoImportado->m_ext_inf_requerimiento = $s_requerimiento;
+											$puestoImportado->m_ext_inf_restriccion = $s_restriccion;
+											$puestoImportado->m_ext_inf_pre_eval = $_resultado_fedd;
+											$puestoImportado->siso_m_ext_inferior = $_resultado_siso;
+											$puestoImportado->resultado_pt_m_ext_inf = $_resultado_puesto;
+											$puestoImportado->resultado_final_m_ext_inf = $_resultado_puesto;
+										} else if ($indice == 3) {
+											$puestoImportado->m_ext_sup_actividad = $s_actividad;
+											$puestoImportado->m_ext_sup_requerimiento = $s_requerimiento;
+											$puestoImportado->m_ext_sup_restriccion = $s_restriccion;
+											$puestoImportado->m_ext_sup_pre_eval = $_resultado_fedd;
+											$puestoImportado->siso_m_ext_superior = $_resultado_siso;
+											$puestoImportado->resultado_pt_m_ext_sup = $_resultado_puesto;
+											$puestoImportado->resultado_final_m_ext_sup = $_resultado_puesto;
+										} else if ($indice == 4) {
+											$puestoImportado->m_intelectual_actividad = $s_actividad;
+											$puestoImportado->m_intelectual_requerimiento = $s_requerimiento;
+											$puestoImportado->m_intelectual_restriccion = $s_restriccion;
+											$puestoImportado->m_intelectual_pre_eval = $_resultado_fedd;
+											$puestoImportado->siso_m_intelectual = $_resultado_siso;
+											$puestoImportado->resultado_pt_m_intelectual = $_resultado_puesto;
+											$puestoImportado->resultado_final_m_intelectual = $_resultado_puesto;
+										} else if ($indice == 5) {
+											$puestoImportado->m_psicosocial_actividad = $s_actividad;
+											$puestoImportado->m_psicosocial_requerimiento = $s_requerimiento;
+											$puestoImportado->m_psicosocial_restriccion = $s_restriccion;
+											$puestoImportado->m_psicosocial_pre_eval = $_resultado_fedd;
+											$puestoImportado->siso_m_psicosocial = $_resultado_siso;
+											$puestoImportado->resultado_pt_m_psicosocial = $_resultado_puesto;
+											$puestoImportado->resultado_final_m_psicosocial = $_resultado_puesto;
+										}
+//											echo "<pre>", print_r($puestoImportado);die();
+										$puestoImportado->save();
+									} else {
+										$this->escribirLogImport($logName . "LogError.txt", "ERROR", " No se Encontro Registro Correspondiente para => ", $_codigo_sabha . " " . $index);
+										$result['log'] = base_url("uploads/Import_" . $logName . "LogError");
+										$indice++;
+										$contador++;
+										continue;
+									}
+
+								} catch (Illuminate\Database\QueryException $e) {
+									$logArray['fila'][] = $line;
+									$error_code = $e->errorInfo[1];
+									if ($error_code == 1062) { // < codigo de error MySQL para unique
+										$this->escribirLogImport($logName . "LogError.txt", "ERROR", "Error al registrar, Codigo SABHA  repetido. ", $_codigo_sabha . " " . $index);
+										$result['log'] = base_url("uploads/Import_" . $logName . "LogError");
+										$indice++;
+										$contador++;
+										continue;
+
+									} else {
+										$this->escribirLogImport($logName . "LogError.txt", "ERROR", "Error al registrar, ocurrio un problema", $_codigo_sabha . " " . $index);
+										$result['log'] = base_url("uploads/Import_" . $logName . "LogError");
+										$indice++;
+										$contador++;
+										continue;
+
+									}
+								}
+
+							} else {
+								$this->escribirLogImport($logName . "LogError.txt", "ERROR", " No se Encontro CODIGO SABHA, Revise Formato de fichero a importar | ", $_codigo_sabha . " " . $index);
+								$result['log'] = base_url("uploads/Import_" . $logName . "LogError");
+								$indice++;
+								$contador++;
+								continue;
+							}
+
+						}
+
+						$indice++;
+						$contador++;
+
+					} else {
+						$this->escribirLogImport($logName . "LogError.txt", "ERROR", "El Area Estandar no se encuentra registrada . | ", $_area_estandar);
+						$result['log'] = base_url("uploads/Import_" . $logName . "LogError");
+						$indice++;
+						$contador++;
+						continue;
+					}
+
+				} else {
+					$this->escribirLogImport($logName . "LogError.txt", "ERROR", "El Local no se encuentra registrado . | ", $_descripcion_local);
+					$result['log'] = base_url("uploads/Import_" . $logName . "LogError");
+					$indice++;
+					$contador++;
+					continue;
+				}
+
+
+
+
+
+
+			}
+
+
+
+
+
+		} catch (Exception $e) {
+
+		}
+
+			unlink($fichero);
+
+			$info = (!is_null($result['log'])) ?
+				"Se importaron " . $puestosImportados . " Puestos de Trabajo. Algunos registros no cumplieron los requisitos de importacion.\nSe adjunta Log de Errores para descargar" :
+				"Se importaron " . $puestosImportados . " Puestos de Trabajo correctamente";
+			$result['status'] = true;
+			$result['result'] = $info;
+
+
+
+
+
+
+		echo json_encode($result);
+
+
 	}
 
 
@@ -584,6 +883,7 @@ class Puestos extends CI_Controller
 	public function exportar()
 	{
 		$permisos = $this->session->userdata('permisos');
+		$id_empresa = $this->session->userdata('id_empresa');
 		if (isset($permisos['puestos']['exportar']) && $permisos['puestos']['exportar'] == 1) {
 
 			ini_set('max_execution_time', -1);
@@ -663,7 +963,9 @@ class Puestos extends CI_Controller
 		puesto_trabajo
 		INNER JOIN `local` ON puesto_trabajo.id_local = `local`.id
 		INNER JOIN area ON puesto_trabajo.id_area = area.id
-		INNER JOIN empresa ON puesto_trabajo.id_empresa = empresa.id;";
+		INNER JOIN empresa ON puesto_trabajo.id_empresa = empresa.id
+		WHERE
+		puesto_trabajo.id_empresa = $id_empresa";
 
 
 			$cabeceras = array(
@@ -734,10 +1036,9 @@ class Puestos extends CI_Controller
 		$permisos = $this->session->userdata('permisos');
 		if (isset($permisos['puestos']['eliminar']) && $permisos['puestos']['eliminar'] == 1) {
 			try {
-				$puesto = Puesto_trabajo_model::find($id_puesto);
-				$puesto->estado = 0;
-				$puesto->save();
 
+				$this->db->query("DELETE FROM cuestionario_sido WHERE id_puesto_trabajo = $id_puesto");
+				$this->db->query("DELETE FROM puesto_trabajo WHERE id = $id_puesto");
 				$result['status'] = true;
 				$result['result'] = 'Se elimino el puesto de trabajo';
 			} catch (Exception $e) {
@@ -786,7 +1087,7 @@ class Puestos extends CI_Controller
 			$this->db->query("SET foreign_key_checks = 1");
 			$this->db->trans_commit();
 			$result['status'] = true;
-			$result['result'] = 'Se elimino correctamente los registros de Puestos de Trabajo';
+			$result['result'] = 'Se elimino correctamente TODOS los registros de Puestos de Trabajo';
 		} catch(Exception $e){
 			$result['result'] = $e->getMessage();
 		}

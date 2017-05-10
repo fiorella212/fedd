@@ -29,9 +29,13 @@
                         </div>
                     </div>
                 </div>
+                <?php $permisos = $_SESSION['permisos']; ?>
                 <div class="modal-footer">
                     <button id="boton_subir2"  type="button" class="btn btn-save btn-s-md btn-primary">Importar</button>
-                    <button id="boton_eliminar_registros"  type="button" class="btn btn-save btn-s-md btn-danger">Eliminar registros</button>
+                    <?php if($permisos['personal']['eliminar'] == 1){
+                    ?>
+                    <button id="boton_eliminar_registros"  type="button" class="btn btn-save btn-s-md btn-danger">Eliminar Personal</button>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -79,7 +83,7 @@
 
         $("#boton_eliminar_registros").on('click', function (event) {
 			event.preventDefault();
-			var msg = confirm("¿Esta seguro de Eliminar los registros?");
+			var msg = confirm("¿Esta seguro de Eliminar TODOS los registros de personal SAP?");
 			if (msg) {
 				$.ajax({
 					method: "POST",

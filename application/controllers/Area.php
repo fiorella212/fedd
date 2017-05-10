@@ -207,12 +207,12 @@ class Area extends CI_Controller
                 $count = Puesto_trabajo_model::where(['id_area'=> $id, 'estado'=>1])->count();
                 if ($count == 0) {
 
-                    $area = Area_model::find($id);
-                    $area->estado = 0;
-                    $area->usuario_modificado = $this->session->userdata('usuario');
-                    $area->fecha_modificado = date('Y-m-d H:i:s');
-
-                    $area->save();
+                    Area_model::destroy($id);
+//                    $area->estado = 0;
+//                    $area->usuario_modificado = $this->session->userdata('usuario');
+//                    $area->fecha_modificado = date('Y-m-d H:i:s');
+//
+//                    $area->save();
 
                     $result['status'] = true;
                     $result['result'] = 'Se elimino el area satisfactoriamente.';

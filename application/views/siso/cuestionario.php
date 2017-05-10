@@ -78,7 +78,7 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 text-center">
-				<a href="<?php echo site_url("main"); ?>" class="btn btn-danger" >Cancelar</a>
+				<a href="<?php echo site_url("siso/index/".$id_puesto_trabajo); ?>" class="btn btn-danger" >Cancelar</a>
 				<input type="button" class="btn btn-primary" data-puesto="<?php echo $id_puesto_trabajo; ?>"
 					   value="Registrar Cuestionario"
 					   id="btnRegistrarEvaluacion">

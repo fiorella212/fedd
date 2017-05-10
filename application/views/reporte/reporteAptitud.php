@@ -3,7 +3,8 @@
     <div class="col-lg-12 col-md-12 col-sm-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h5 class="text-center">Nro. 6 Determinación de la aptitud de puestos disponibles para incorporar personas con discapacidad</h5>
+                <h5 class="text-center">Reporte nro. 6 Aptitud de puestos disponibles para personas con discapacidad
+                </h5>
             </div>
             <div class="panel-body">
                 <form method="post" action="<?php echo site_url('reporte/reporte5Excel'); ?>">
@@ -28,14 +29,14 @@
                 <br/>
                 <div class="table-responsive" id="table">
                     <table class="table" style="width: 100%; solid:1px" id="tblPuestos">
-                        <thead style=" !important ;background: #3B5A66; color: white">
+                        <thead style=" !important ;background: #2C3A63; color: white">
                         <th style="text-align:center;" rowspan="2">SEDES</th>
                         <th style="text-align:center;" colspan="2">Nro. AREAS</th>
                         <th style="text-align:center;" colspan="2">APTO</th>
                         <th style="text-align:center;" colspan="2">NO APTO</th>
                         <th style="text-align:center;" >TOTAL </th>
                         </thead>
-                        <thead style="text-align:center !important; background: #3B5A66; color: white">
+                        <thead style="text-align:center !important; background: #2C3A63; color: white">
                         <th></th>
                         <th></th>
                         <th></th>

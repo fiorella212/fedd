@@ -73,9 +73,9 @@
                                                 <td style="text-align: center;"><?php echo strtoupper($value['nombre']); ?></td>
                                                 <td style="text-align: center;"><label class="checkbox i-checks"><input name="chkAcceso" id="chkAcceso<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></label></td>
                                                 <?php if($value['nombre'] != 'EVALUACION EVA-ERIN' && $value['nombre'] != 'EVALUACION SISO' && $value['nombre'] != 'EVALUACION FEDD'
-                                                    && $value['nombre'] != 'IMPORTAR PERSONAL SAP' && $value['nombre'] != 'REPORTE INTERNO' && $value['nombre'] != 'REPORTE PUESTOS'
-                                                    && $value['nombre'] != 'REPORTE TABLA 1' && $value['nombre'] != 'REPORTE TABLA 3' && $value['nombre'] != 'REPORTE TABLA 4' && $value['nombre'] != 'REPORTE TABLA 5'
-                                                    && $value['nombre'] != 'REPORTE TABLA 6' && $value['nombre'] != 'REPORTE TABLA 7'){?>
+                                                     && $value['nombre'] != 'IMPORTAR PERSONAL SAP' && $value['nombre'] != 'REPORTE INTERNO' && $value['nombre'] != 'REPORTE PUESTOS'
+                                                    && $value['nombre'] != 'PUESTOS POR EMPRESA' && $value['nombre'] != 'PUESTOS POR ACTIVIDAD' && $value['nombre'] != 'FUNCIONALIDAD POR PUESTO' && $value['nombre'] != 'RIESGO POR SEDE'
+                                                    && $value['nombre'] != 'APTITUD DE LOS PUESTOS' && $value['nombre'] != 'REDUCCION DE CONTINGENCIA'){?>
 
                                                     <td style="text-align: center;"><label class="checkbox i-checks"><input name="chkAgregar" id="chkAgregar<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></td>
                                                     <td style="text-align: center;"><label class="checkbox i-checks"><input name="chkEditar" id="chkEditar<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></td>
@@ -83,7 +83,7 @@
 
                                                     <td style="text-align: center;"><label class="checkbox i-checks"><input name="chkExportar" id="chkExportar<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></td>
 
-                                                <?php if($value['nombre'] != 'MANT. EMPRESA' && $value['nombre'] != 'MANT. LOCAL' && $value['nombre'] != 'MANT. AREA'
+                                                <?php if($value['nombre'] != 'MANT. EMPRESA' && $value['nombre'] != 'MANT. SEDE' && $value['nombre'] != 'MANT. AREA'
                                                     && $value['nombre'] != 'MANT. ROLES' && $value['nombre'] != 'MANT. USUARIO' && $value['nombre'] != 'CONFIGURACION SISO'){?>
                                                     <td><label class="checkbox i-checks"><input name="chkImportar" id="chkImportar<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></td>
                                                     <?php }else{ ?>
@@ -92,10 +92,13 @@
                                                 <?php }else{ ?>
                                                     <td></td>
                                                     <td></td>
-                                                    <td></td>
-
-                                                <?php if($value['nombre'] == 'REPORTE PUESTOS' || $value['nombre'] == 'REPORTE TABLA 1' || $value['nombre'] == 'REPORTE TABLA 3' || $value['nombre'] == 'REPORTE TABLA 4' || $value['nombre'] == 'REPORTE TABLA 5'
-                                                        || $value['nombre'] == 'REPORTE TABLA 6' || $value['nombre'] == 'REPORTE TABLA 7'){?>
+                                                    <?php if($value['nombre'] == 'IMPORTAR PERSONAL SAP'){?>
+                                                        <td style="text-align: center;"><label class="checkbox i-checks"><input name="chkEliminar" id="chkEliminar<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></td>
+                                                    <?php }else{ ?>
+                                                        <td></td>
+                                                    <?php }  ?>
+                                                    <?php if($value['nombre'] == 'REPORTE PUESTOS' || $value['nombre'] == 'PUESTOS POR EMPRESA' || $value['nombre'] == 'PUESTOS POR ACTIVIDAD' || $value['nombre'] == 'FUNCIONALIDAD POR PUESTO' || $value['nombre'] == 'RIESGO POR SEDE'
+                                                        || $value['nombre'] == 'APTITUD DE LOS PUESTOS' || $value['nombre'] == 'REDUCCION DE CONTINGENCIA'){?>
                                                         <td style="text-align: center;"><label class="checkbox i-checks"><input name="chkExportar" id="chkExportar<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></td>
                                                    <?php }else{ ?>
                                                         <td></td>
@@ -168,13 +171,13 @@
                                             <td style="text-align: center;"><label class="checkbox i-checks"><input name="chkAcceso" id="chkAcceso<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></label></td>
                                             <?php if($value['nombre'] != 'EVALUACION EVA-ERIN' && $value['nombre'] != 'EVALUACION SISO' && $value['nombre'] != 'EVALUACION FEDD'
                                                       && $value['nombre'] != 'IMPORTAR PERSONAL SAP' && $value['nombre'] != 'REPORTE INTERNO' && $value['nombre'] != 'REPORTE PUESTOS'
-                                                      && $value['nombre'] != 'REPORTE TABLA 1' && $value['nombre'] != 'REPORTE TABLA 3' && $value['nombre'] != 'REPORTE TABLA 4' && $value['nombre'] != 'REPORTE TABLA 5'
-                                                && $value['nombre'] != 'REPORTE TABLA 6' && $value['nombre'] != 'REPORTE TABLA 7'){?>
+                                                      && $value['nombre'] != 'PUESTOS POR EMPRESA' && $value['nombre'] != 'PUESTOS POR ACTIVIDAD' && $value['nombre'] != 'FUNCIONALIDAD POR PUESTO' && $value['nombre'] != 'RIESGO POR SEDE'
+                                                && $value['nombre'] != 'APTITUD DE LOS PUESTOS' && $value['nombre'] != 'REDUCCION DE CONTINGENCIA'){?>
                                                 <td style="text-align: center;"><label class="checkbox i-checks"><input name="chkAgregar" id="chkAgregar<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></td>
                                                 <td style="text-align: center;"><label class="checkbox i-checks"><input name="chkEditar" id="chkEditar<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></td>
                                                 <td style="text-align: center;"><label class="checkbox i-checks"><input name="chkEliminar" id="chkEliminar<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></td>
                                                 <td style="text-align: center;"><label class="checkbox i-checks"><input name="chkExportar" id="chkExportar<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></td>
-                                            <?php if($value['nombre'] != 'MANT. EMPRESA' && $value['nombre'] != 'MANT. LOCAL' && $value['nombre'] != 'MANT. AREA'
+                                            <?php if($value['nombre'] != 'MANT. EMPRESA' && $value['nombre'] != 'MANT. SEDE' && $value['nombre'] != 'MANT. AREA'
                                                     && $value['nombre'] != 'MANT. ROLES' && $value['nombre'] != 'MANT. USUARIO' && $value['nombre'] != 'CONFIGURACION SISO'){?>
                                                 <td style="text-align: center;"><label class="checkbox i-checks"><input name="chkImportar" id="chkImportar<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></td>
                                                 <?php }else{ ?>
@@ -183,9 +186,13 @@
                                             <?php }else{ ?>
                                                 <td></td>
                                                 <td></td>
-                                                <td></td>
-                                                <?php if($value['nombre'] == 'REPORTE PUESTOS' || $value['nombre'] == 'REPORTE TABLA 1' || $value['nombre'] == 'REPORTE TABLA 3' || $value['nombre'] == 'REPORTE TABLA 4' || $value['nombre'] == 'REPORTE TABLA 5'
-                                                    || $value['nombre'] == 'REPORTE TABLA 6' || $value['nombre'] == 'REPORTE TABLA 7'){?>
+                                                <?php if($value['nombre'] == 'IMPORTAR PERSONAL SAP'){?>
+                                                    <td style="text-align: center;"><label class="checkbox i-checks"><input name="chkEliminar" id="chkEliminar<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></td>
+                                                <?php }else{ ?>
+                                                    <td></td>
+                                                <?php }  ?>
+                                                <?php if($value['nombre'] == 'REPORTE PUESTOS' || $value['nombre'] == 'PUESTOS POR EMPRESA' || $value['nombre'] == 'PUESTOS POR ACTIVIDAD' || $value['nombre'] == 'FUNCIONALIDAD POR PUESTO' || $value['nombre'] == 'RIESGO POR SEDE'
+                                                    || $value['nombre'] == 'APTITUD DE LOS PUESTOS' || $value['nombre'] == 'REDUCCION DE CONTINGENCIA'){?>
                                                     <td style="text-align: center;"><label class="checkbox i-checks"><input name="chkExportar" id="chkExportar<?php echo $value['id']; ?>" value="1" type="checkbox" ><i></i></td>
                                                 <?php }else{ ?>
                                                     <td></td>
